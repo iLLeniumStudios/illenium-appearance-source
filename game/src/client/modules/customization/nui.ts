@@ -5,7 +5,7 @@ import {
   getComponentSettings,
   getHairSettings,
   getPropSettings,
-  pedTurnAround,
+  pedTurn,
   setCamera,
   rotateCamera,
   exitPlayerCustomization,
@@ -52,6 +52,9 @@ export function registerNuiCallbacks(): void {
   RegisterNuiCallbackType('appearance_save');
   RegisterNuiCallbackType('appearance_exit');
 
+  RegisterNuiCallbackType('rotate_left');
+  RegisterNuiCallbackType('rotate_right');
+
   on('__cfx_nui:appearance_get_locales', (_: any, cb: (arg: any) => void): void => {
     const locales = LoadResourceFile(
       GetCurrentResourceName(),
@@ -76,7 +79,7 @@ export function registerNuiCallbacks(): void {
   on('__cfx_nui:appearance_turn_around', (_: any, cb: (arg: any) => void): void => {
     cb({});
 
-    pedTurnAround(PlayerPedId());
+    pedTurn(PlayerPedId(), 180.0);
   });
 
   on(
@@ -196,5 +199,15 @@ export function registerNuiCallbacks(): void {
   on('__cfx_nui:appearance_exit', (_: any, cb: (arg: any) => void): void => {
     cb({});
     exitPlayerCustomization();
+  });
+
+  on('__cfx_nui:rotate_left', (_: any, cb: (arg: any) => void): void => {
+    cb({});
+    pedTurn(PlayerPedId(), 10.0);
+  });
+
+  on('__cfx_nui:rotate_right', (_: any, cb: (arg: any) => void): void => {
+    cb({});
+    pedTurn(PlayerPedId(), -10.0);
   });
 }
