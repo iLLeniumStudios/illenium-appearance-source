@@ -232,6 +232,13 @@ const HeadOverlays = ({
           clientValue={storedData.headOverlays.makeUp.color}
           onChange={value => handleHeadOverlayChange('makeUp', 'color', value)}
         />
+        <ColorInput
+          title={locales.headOverlays.secondColor}
+          colors={settings.headOverlays.makeUp.color?.items}
+          defaultValue={data.headOverlays.makeUp.secondColor}
+          clientValue={storedData.headOverlays.makeUp.secondColor}
+          onChange={value => handleHeadOverlayChange('makeUp', 'secondColor', value)}
+        />
       </Item>
       <Item title={locales.headOverlays.blush}>
         <RangeInput

@@ -105,16 +105,24 @@ function getPedFaceFeatures(ped: number): PedFaceFeatures {
 function getPedHeadOverlays(ped: number): PedHeadOverlays {
   const headOverlays = HEAD_OVERLAYS.reduce((object, overlay, index) => {
     // success, value, colorType, firstColor, secondColor, opacity
-    const [, value, , firstColor, , opacity] = GetPedHeadOverlayData(ped, index);
+    const [, value, , firstColor, secondColor, opacity] = GetPedHeadOverlayData(ped, index);
 
     const hasOverlay = value !== 255;
 
     const safeValue = hasOverlay ? value : 0;
     const normalizedOpacity = hasOverlay ? parseFloat(opacity.toFixed(1)) : 0;
+    let overlayData;
+
+    if(overlay === 'makeUp') {
+      overlayData = { style: safeValue, opacity: normalizedOpacity, color: firstColor, secondColor: secondColor }
+    }
+    else {
+      overlayData = { style: safeValue, opacity: normalizedOpacity, color: firstColor }
+    }
 
     return {
       ...object,
-      [overlay]: { style: safeValue, opacity: normalizedOpacity, color: firstColor },
+      [overlay]: overlayData,
     };
   }, {} as PedHeadOverlays);
 
@@ -240,6 +248,7 @@ export function setPedHeadOverlays(ped: number, headOverlays: PedHeadOverlays): 
 
     if (headOverlay.color || headOverlay.color === 0) {
       let colorType = 1;
+      var secondColor = headOverlay.color;
 
       const isMakeupColor = {
         blush: true,
@@ -251,7 +260,11 @@ export function setPedHeadOverlays(ped: number, headOverlays: PedHeadOverlays): 
         colorType = 2;
       }
 
-      SetPedHeadOverlayColor(ped, index, colorType, headOverlay.color, headOverlay.color);
+      if(key === 'makeUp') {
+        secondColor = headOverlay.secondColor;
+      }
+
+      SetPedHeadOverlayColor(ped, index, colorType, headOverlay.color, secondColor);
     }
   });
 }

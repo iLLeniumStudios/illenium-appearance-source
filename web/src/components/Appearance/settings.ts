@@ -77,6 +77,7 @@ export const APPEARANCE_INITIAL_STATE: PedAppearance = {
       style: 0,
       opacity: 0,
       color: 0,
+      secondColor: 0,
     },
     blush: {
       style: 0,
