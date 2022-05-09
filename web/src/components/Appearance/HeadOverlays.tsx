@@ -36,6 +36,7 @@ interface HeadOverlaysProps {
     eyeColor: number;
     fade: Tattoo | null;
   };
+  isPedFreemodeModel: boolean | undefined;
   handleHairChange: (key: keyof PedHair, value: number) => void;
   handleHeadOverlayChange: (key: keyof PedHeadOverlays, option: keyof PedHeadOverlayValue, value: number) => void;
   handleEyeColorChange: (value: number) => void;
@@ -46,6 +47,7 @@ const HeadOverlays = ({
   settings,
   storedData,
   data,
+  isPedFreemodeModel,
   handleHairChange,
   handleHeadOverlayChange,
   handleEyeColorChange, 
@@ -80,6 +82,8 @@ const HeadOverlays = ({
           clientValue={storedData.hair.style}
           onChange={value => handleHairChange('style', value)}
         />
+        {isPedFreemodeModel && (
+        <>
         <Input
           title={locales.headOverlays.hair.fade}
           min={0}
@@ -101,7 +105,10 @@ const HeadOverlays = ({
           defaultValue={data.hair.highlight}
           onChange={value => handleHairChange('highlight', value)}
         />
+        </>)}
       </Item>
+      {isPedFreemodeModel && (
+        <>
       <Item title={locales.headOverlays.blemishes}>
         <RangeInput
           title={locales.headOverlays.opacity}
@@ -382,6 +389,8 @@ const HeadOverlays = ({
           onChange={value => handleEyeColorChange(value)}
         />
       </Item>
+      </>
+      )}
     </Section>
   );
 };

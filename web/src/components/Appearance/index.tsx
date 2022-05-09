@@ -497,9 +497,9 @@ const Appearance = () => {
                       handleModelChange={handleModelChange}
                     />
                   )}
-                  {isPedFreemodeModel && appearanceSettings && (
+                  {appearanceSettings && (
                     <>
-                      {config.headBlend && (
+                      {isPedFreemodeModel && config.headBlend && (
                         <HeadBlend
                           settings={appearanceSettings.headBlend}
                           storedData={storedData.headBlend}
@@ -507,7 +507,7 @@ const Appearance = () => {
                           handleHeadBlendChange={handleHeadBlendChange}
                         />
                       )}
-                      {config.faceFeatures && (
+                      {isPedFreemodeModel && config.faceFeatures && (
                         <FaceFeatures
                           settings={appearanceSettings.faceFeatures}
                           storedData={storedData.faceFeatures}
@@ -535,6 +535,7 @@ const Appearance = () => {
                             eyeColor: data.eyeColor,
                             fade: data.tattoos?.ZONE_HAIR?.length > 0 ? data.tattoos.ZONE_HAIR[0] : null
                           }}
+                          isPedFreemodeModel={isPedFreemodeModel}
                           handleHairChange={handleHairChange}
                           handleHeadOverlayChange={handleHeadOverlayChange}
                           handleEyeColorChange={handleEyeColorChange}
