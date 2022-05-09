@@ -136,7 +136,7 @@ const Input: React.FC<InputProps> = ({ title, min = 0, max = 255, defaultValue, 
     <Container onClick={handleContainerClick}>
       <span>
         <small>{title}</small>
-        <small>{clientValue}</small>
+        <small>{clientValue} / {max}</small>
       </span>
       <div>
         <button type="button" onClick={() => handleChange(defaultValue - 1)}>
