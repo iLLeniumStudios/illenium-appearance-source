@@ -30,7 +30,7 @@ const customStyles: any = {
   control: (styles: any) => ({
     ...styles,
     marginTop: '10px',
-    background: 'rgba(0, 0, 0, 0.8)',
+    background: 'rgba(23, 23, 23, 0.8)',
     fontSize: '14px',
     color: '#fff',
     border: 'none',
@@ -71,14 +71,14 @@ const customStyles: any = {
   }),
   menu: (styles: any) => ({
     ...styles,
-    background: 'rgba(0, 0, 0, 0.8)',
+    background: 'rgba(23, 23, 23, 0.8)',
     position: 'absolute',
     marginBottom: '10px',
     borderRadius: '4px',
   }),
   menuList: (styles: any) => ({
     ...styles,
-    background: 'rgba(0, 0, 0, 0.8)',
+    background: 'rgba(23, 23, 23, 0.8)',
     borderRadius: '4px',
     '&::-webkit-scrollbar': {
       width: '10px',

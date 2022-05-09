@@ -22,7 +22,7 @@ export const Container = styled.div`
 
   padding: 40px 10px;
 
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  background: linear-gradient(to right, rgba(23, 23, 23, 0.8), rgba(23, 23, 23, 0));
 
   overflow-y: scroll;
 
@@ -31,16 +31,16 @@ export const Container = styled.div`
   }
 
   ::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(220, 20, 60, 0.2);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
+    background: rgba(220, 20, 60, 0.2);
+    border-radius: 3vh;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(220, 20, 60, 0.2);
   }
 `;
 

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, ReactNode } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { useSpring, animated } from 'react-spring';
 
@@ -37,23 +37,36 @@ const Header = styled.div<HeaderProps>`
   justify-content: space-between;
 
   padding: 0 10px;
-  border-radius: 4px;
+  border-radius: 3vh;
 
   z-index: 2;
 
-  background: rgba(0, 0, 0, ${({ active }) => (active ? '0.9' : '0.7')});
+  background: rgba(23, 23, 23, ${({ active }) => (active ? '0.9' : '0.7')});
 
   box-shadow: 0px 0px 5px rgb(0, 0, 0, 0.2);
 
   transition: background 0.1s;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(220, 20, 60, 0.9);
+    transform: scale(1.05);
+    transition: background 0.2s;
     cursor: pointer;
   }
 
+  ${({ active }) =>
+    active &&
+    css`
+      background: rgba(220, 20, 60);
+      &:hover {
+        transition: background 0.2s;
+        background: rgba(220, 20, 60, 1);
+      }
+    `}
+
   span {
     font-size: 15px;
+    font-weight: bold;
   }
 `;
 

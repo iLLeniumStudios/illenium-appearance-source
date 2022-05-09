@@ -15,7 +15,7 @@ const Container = styled.div`
   padding: 10px;
   border-radius: 2px;
 
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(23, 23, 23, 0.3);
 
   span {
     color: #fff;

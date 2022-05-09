@@ -46,6 +46,8 @@ const Button = styled.button<ButtonProps>`
 
   &:hover {
     border: 2px solid rgba(255, 255, 255, 0.5);
+    transition: background 0.2s;
+    transform: scale(1.1);
   }
 
   ${({ selected }) =>
