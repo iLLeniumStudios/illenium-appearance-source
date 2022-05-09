@@ -82,6 +82,14 @@ const HeadOverlays = ({
           clientValue={storedData.hair.style}
           onChange={value => handleHairChange('style', value)}
         />
+        <Input
+          title={locales.headOverlays.hair.texture}
+          min={settings.hair.texture.min}
+          max={settings.hair.texture.max}
+          defaultValue={data.hair.texture}
+          clientValue={storedData.hair.texture}
+          onChange={value => handleHairChange('texture', value)}
+        />
         {isPedFreemodeModel && (
         <>
         <Input

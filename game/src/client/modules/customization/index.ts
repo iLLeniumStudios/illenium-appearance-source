@@ -121,6 +121,28 @@ export function getPropSettings(ped: number, propId: number): PropSettings {
   return settings;
 }
 
+export function getHairSettings(ped: number, hair: PedHair): HairSettings {
+  const colors = getRgbColors();
+  const settings: HairSettings = {
+    style: {
+      min: 0,
+      max: GetNumberOfPedDrawableVariations(ped, 2) - 1,
+    },
+    color: {
+      items: colors.hair,
+    },
+    highlight: {
+      items: colors.hair,
+    },
+    texture: {
+      min: 0,
+      max: GetNumberOfPedTextureVariations(ped, 2, hair.style) - 1,
+    }
+  };
+
+  return settings;
+}
+
 export function getAppearanceSettings(): AppearanceSettings {
   const playerPed = PlayerPedId();
 
@@ -219,6 +241,10 @@ export function getAppearanceSettings(): AppearanceSettings {
     highlight: {
       items: colors.hair,
     },
+    texture: {
+      min: 0,
+      max: GetNumberOfPedTextureVariations(playerPed, 2, GetPedDrawableVariation(playerPed, 2)) - 1,
+    }
   };
 
   const eyeColor: EyeColorSettings = {

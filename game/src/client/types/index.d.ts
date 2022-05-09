@@ -72,6 +72,7 @@ interface PedHair {
   style: number;
   color: number;
   highlight: number;
+  texture: number;
 }
 
 interface PedComponent {
@@ -193,6 +194,10 @@ interface HairSettings {
   highlight: {
     items: number[][];
   };
+  texture: {
+    min: number;
+    max: number;
+  }
 }
 
 interface EyeColorSettings {

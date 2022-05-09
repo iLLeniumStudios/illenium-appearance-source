@@ -3,6 +3,7 @@ import {
   getAppearanceSettings,
   getConfig,
   getComponentSettings,
+  getHairSettings,
   getPropSettings,
   pedTurnAround,
   setCamera,
@@ -144,8 +145,9 @@ export function registerNuiCallbacks(): void {
   );
 
   on('__cfx_nui:appearance_change_hair', (hair: PedHair, cb: (arg: any) => void): void => {
-    cb({});
-    setPedHair(PlayerPedId(), hair);
+    const playerPed = PlayerPedId();
+    setPedHair(playerPed, hair);
+    cb(getHairSettings(playerPed, hair));
   });
 
   on('__cfx_nui:appearance_change_eye_color', (eyeColor: number, cb: (arg: any) => void): void => {

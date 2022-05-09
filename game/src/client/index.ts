@@ -126,6 +126,7 @@ function getPedHair(ped: number): PedHair {
     style: GetPedDrawableVariation(ped, 2),
     color: GetPedHairColor(ped),
     highlight: GetPedHairHighlightColor(ped),
+    texture: GetPedTextureVariation(ped, 2),
   };
 }
 
@@ -258,9 +259,9 @@ export function setPedHeadOverlays(ped: number, headOverlays: PedHeadOverlays): 
 export function setPedHair(ped: number, hair: PedHair): void {
   if (!hair) return;
 
-  const { style, color, highlight } = hair;
+  const { style, color, highlight, texture } = hair;
 
-  SetPedComponentVariation(ped, 2, style, 0, 0);
+  SetPedComponentVariation(ped, 2, style, texture, 2);
 
   SetPedHairColor(ped, color, highlight);
 

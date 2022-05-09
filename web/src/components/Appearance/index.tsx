@@ -225,8 +225,8 @@ const Appearance = () => {
   );
 
   const handleHairChange = useCallback(
-    (key: keyof PedHair, value: number) => {
-      if (!data) return;
+    async (key: keyof PedHair, value: number) => {
+      if (!data || !appearanceSettings) return;
 
       const updatedHair = { ...data.hair, [key]: value };
 
@@ -234,9 +234,13 @@ const Appearance = () => {
 
       setData(updatedData);
 
-      Nui.post('appearance_change_hair', updatedHair);
+      const updatedHairSettings = await Nui.post('appearance_change_hair', updatedHair);
+
+      const updatedSettings = { ...appearanceSettings, hair: updatedHairSettings };
+
+      setAppearanceSettings(updatedSettings);
     },
-    [data, setData],
+    [data, setData, appearanceSettings, setAppearanceSettings],
   );
 
   const handleChangeFade = useCallback(async (value: number) => {

@@ -82,6 +82,7 @@ export default interface Locales {
       color: string;
       highlight: string;
       fade: string;
+      texture: string;
     };
     opacity: string;
     style: string;

@@ -55,6 +55,7 @@ export interface PedHair {
   style: number;
   color: number;
   highlight: number;
+  texture: number;
 }
 
 export interface PedComponent {
@@ -176,6 +177,10 @@ export interface HairSettings {
   highlight: {
     items: number[][];
   };
+  texture: {
+    min: number;
+    max: number;
+  }
 }
 
 export interface EyeColorSettings {

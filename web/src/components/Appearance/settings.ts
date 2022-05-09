@@ -114,6 +114,7 @@ export const APPEARANCE_INITIAL_STATE: PedAppearance = {
     style: 0,
     color: 0,
     highlight: 0,
+    texture: 0,
   },
   eyeColor: 0,
 };
@@ -473,6 +474,10 @@ export const SETTINGS_INITIAL_STATE: AppearanceSettings = {
         [0, 0, 255],
       ],
     },
+    texture: {
+      min: 0,
+      max: 255,
+    }
   },
   eyeColor: {
     min: 0,
