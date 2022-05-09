@@ -66,86 +66,6 @@ const Components = ({
           />
         </FlexWrapper>
       </Item>
-      <Item title={locales.components.upperBody}>
-        <FlexWrapper>
-          <Input
-            title={locales.components.drawable}
-            min={settingsById[3].drawable.min}
-            max={settingsById[3].drawable.max}
-            defaultValue={componentsById[3].drawable}
-            clientValue={storedComponentsById[3].drawable}
-            onChange={value => handleComponentDrawableChange(3, value)}
-          />
-          <Input
-            title={locales.components.texture}
-            min={settingsById[3].texture.min}
-            max={settingsById[3].texture.max}
-            defaultValue={componentsById[3].texture}
-            clientValue={storedComponentsById[3].texture}
-            onChange={value => handleComponentTextureChange(3, value)}
-          />
-        </FlexWrapper>
-      </Item>
-      <Item title={locales.components.lowerBody}>
-        <FlexWrapper>
-          <Input
-            title={locales.components.drawable}
-            min={settingsById[4].drawable.min}
-            max={settingsById[4].drawable.max}
-            defaultValue={componentsById[4].drawable}
-            clientValue={storedComponentsById[4].drawable}
-            onChange={value => handleComponentDrawableChange(4, value)}
-          />
-          <Input
-            title={locales.components.texture}
-            min={settingsById[4].texture.min}
-            max={settingsById[4].texture.max}
-            defaultValue={componentsById[4].texture}
-            clientValue={storedComponentsById[4].texture}
-            onChange={value => handleComponentTextureChange(4, value)}
-          />
-        </FlexWrapper>
-      </Item>
-      <Item title={locales.components.bags}>
-        <FlexWrapper>
-          <Input
-            title={locales.components.drawable}
-            min={settingsById[5].drawable.min}
-            max={settingsById[5].drawable.max}
-            defaultValue={componentsById[5].drawable}
-            clientValue={storedComponentsById[5].drawable}
-            onChange={value => handleComponentDrawableChange(5, value)}
-          />
-          <Input
-            title={locales.components.texture}
-            min={settingsById[5].texture.min}
-            max={settingsById[5].texture.max}
-            defaultValue={componentsById[5].texture}
-            clientValue={storedComponentsById[5].texture}
-            onChange={value => handleComponentTextureChange(5, value)}
-          />
-        </FlexWrapper>
-      </Item>
-      <Item title={locales.components.shoes}>
-        <FlexWrapper>
-          <Input
-            title={locales.components.drawable}
-            min={settingsById[6].drawable.min}
-            max={settingsById[6].drawable.max}
-            defaultValue={componentsById[6].drawable}
-            clientValue={storedComponentsById[6].drawable}
-            onChange={value => handleComponentDrawableChange(6, value)}
-          />
-          <Input
-            title={locales.components.texture}
-            min={settingsById[6].texture.min}
-            max={settingsById[6].texture.max}
-            defaultValue={componentsById[6].texture}
-            clientValue={storedComponentsById[6].texture}
-            onChange={value => handleComponentTextureChange(6, value)}
-          />
-        </FlexWrapper>
-      </Item>
       <Item title={locales.components.scarfAndChains}>
         <FlexWrapper>
           <Input
@@ -163,6 +83,26 @@ const Components = ({
             defaultValue={componentsById[7].texture}
             clientValue={storedComponentsById[7].texture}
             onChange={value => handleComponentTextureChange(7, value)}
+          />
+        </FlexWrapper>
+      </Item>
+      <Item title={locales.components.jackets}>
+        <FlexWrapper>
+          <Input
+            title={locales.components.drawable}
+            min={settingsById[11].drawable.min}
+            max={settingsById[11].drawable.max}
+            defaultValue={componentsById[11].drawable}
+            clientValue={storedComponentsById[11].drawable}
+            onChange={value => handleComponentDrawableChange(11, value)}
+          />
+          <Input
+            title={locales.components.texture}
+            min={settingsById[11].texture.min}
+            max={settingsById[11].texture.max}
+            defaultValue={componentsById[11].texture}
+            clientValue={storedComponentsById[11].texture}
+            onChange={value => handleComponentTextureChange(11, value)}
           />
         </FlexWrapper>
       </Item>
@@ -206,6 +146,86 @@ const Components = ({
           />
         </FlexWrapper>
       </Item>
+      <Item title={locales.components.bags}>
+        <FlexWrapper>
+          <Input
+            title={locales.components.drawable}
+            min={settingsById[5].drawable.min}
+            max={settingsById[5].drawable.max}
+            defaultValue={componentsById[5].drawable}
+            clientValue={storedComponentsById[5].drawable}
+            onChange={value => handleComponentDrawableChange(5, value)}
+          />
+          <Input
+            title={locales.components.texture}
+            min={settingsById[5].texture.min}
+            max={settingsById[5].texture.max}
+            defaultValue={componentsById[5].texture}
+            clientValue={storedComponentsById[5].texture}
+            onChange={value => handleComponentTextureChange(5, value)}
+          />
+        </FlexWrapper>
+      </Item>
+      <Item title={locales.components.upperBody}>
+        <FlexWrapper>
+          <Input
+            title={locales.components.drawable}
+            min={settingsById[3].drawable.min}
+            max={settingsById[3].drawable.max}
+            defaultValue={componentsById[3].drawable}
+            clientValue={storedComponentsById[3].drawable}
+            onChange={value => handleComponentDrawableChange(3, value)}
+          />
+          <Input
+            title={locales.components.texture}
+            min={settingsById[3].texture.min}
+            max={settingsById[3].texture.max}
+            defaultValue={componentsById[3].texture}
+            clientValue={storedComponentsById[3].texture}
+            onChange={value => handleComponentTextureChange(3, value)}
+          />
+        </FlexWrapper>
+      </Item>
+      <Item title={locales.components.lowerBody}>
+        <FlexWrapper>
+          <Input
+            title={locales.components.drawable}
+            min={settingsById[4].drawable.min}
+            max={settingsById[4].drawable.max}
+            defaultValue={componentsById[4].drawable}
+            clientValue={storedComponentsById[4].drawable}
+            onChange={value => handleComponentDrawableChange(4, value)}
+          />
+          <Input
+            title={locales.components.texture}
+            min={settingsById[4].texture.min}
+            max={settingsById[4].texture.max}
+            defaultValue={componentsById[4].texture}
+            clientValue={storedComponentsById[4].texture}
+            onChange={value => handleComponentTextureChange(4, value)}
+          />
+        </FlexWrapper>
+      </Item>
+      <Item title={locales.components.shoes}>
+        <FlexWrapper>
+          <Input
+            title={locales.components.drawable}
+            min={settingsById[6].drawable.min}
+            max={settingsById[6].drawable.max}
+            defaultValue={componentsById[6].drawable}
+            clientValue={storedComponentsById[6].drawable}
+            onChange={value => handleComponentDrawableChange(6, value)}
+          />
+          <Input
+            title={locales.components.texture}
+            min={settingsById[6].texture.min}
+            max={settingsById[6].texture.max}
+            defaultValue={componentsById[6].texture}
+            clientValue={storedComponentsById[6].texture}
+            onChange={value => handleComponentTextureChange(6, value)}
+          />
+        </FlexWrapper>
+      </Item>
       <Item title={locales.components.decals}>
         <FlexWrapper>
           <Input
@@ -223,26 +243,6 @@ const Components = ({
             defaultValue={componentsById[10].texture}
             clientValue={storedComponentsById[10].texture}
             onChange={value => handleComponentTextureChange(10, value)}
-          />
-        </FlexWrapper>
-      </Item>
-      <Item title={locales.components.jackets}>
-        <FlexWrapper>
-          <Input
-            title={locales.components.drawable}
-            min={settingsById[11].drawable.min}
-            max={settingsById[11].drawable.max}
-            defaultValue={componentsById[11].drawable}
-            clientValue={storedComponentsById[11].drawable}
-            onChange={value => handleComponentDrawableChange(11, value)}
-          />
-          <Input
-            title={locales.components.texture}
-            min={settingsById[11].texture.min}
-            max={settingsById[11].texture.max}
-            defaultValue={componentsById[11].texture}
-            clientValue={storedComponentsById[11].texture}
-            onChange={value => handleComponentTextureChange(11, value)}
           />
         </FlexWrapper>
       </Item>

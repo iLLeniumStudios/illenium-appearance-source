@@ -117,51 +117,6 @@ const HeadOverlays = ({
       </Item>
       {isPedFreemodeModel && (
         <>
-      <Item title={locales.headOverlays.blemishes}>
-        <RangeInput
-          title={locales.headOverlays.opacity}
-          min={settings.headOverlays.blemishes.opacity.min}
-          max={settings.headOverlays.blemishes.opacity.max}
-          factor={settings.headOverlays.blemishes.opacity.factor}
-          defaultValue={data.headOverlays.blemishes.opacity}
-          clientValue={storedData.headOverlays.blemishes.opacity}
-          onChange={value => handleHeadOverlayChange('blemishes', 'opacity', value)}
-        />
-        <Input
-          title={locales.headOverlays.style}
-          min={settings.headOverlays.blemishes.style.min}
-          max={settings.headOverlays.blemishes.style.max}
-          defaultValue={data.headOverlays.blemishes.style}
-          clientValue={storedData.headOverlays.blemishes.style}
-          onChange={value => handleHeadOverlayChange('blemishes', 'style', value)}
-        />
-      </Item>
-      <Item title={locales.headOverlays.beard}>
-        <RangeInput
-          title={locales.headOverlays.opacity}
-          min={settings.headOverlays.beard.opacity.min}
-          max={settings.headOverlays.beard.opacity.max}
-          factor={settings.headOverlays.beard.opacity.factor}
-          defaultValue={data.headOverlays.beard.opacity}
-          clientValue={storedData.headOverlays.beard.opacity}
-          onChange={value => handleHeadOverlayChange('beard', 'opacity', value)}
-        />
-        <Input
-          title={locales.headOverlays.style}
-          min={settings.headOverlays.beard.style.min}
-          max={settings.headOverlays.beard.style.max}
-          defaultValue={data.headOverlays.beard.style}
-          clientValue={storedData.headOverlays.beard.style}
-          onChange={value => handleHeadOverlayChange('beard', 'style', value)}
-        />
-        <ColorInput
-          title={locales.headOverlays.color}
-          colors={settings.headOverlays.beard.color?.items}
-          defaultValue={data.headOverlays.beard.color}
-          clientValue={storedData.headOverlays.beard.color}
-          onChange={value => handleHeadOverlayChange('beard', 'color', value)}
-        />
-      </Item>
       <Item title={locales.headOverlays.eyebrows}>
         <RangeInput
           title={locales.headOverlays.opacity}
@@ -188,23 +143,14 @@ const HeadOverlays = ({
           onChange={value => handleHeadOverlayChange('eyebrows', 'color', value)}
         />
       </Item>
-      <Item title={locales.headOverlays.ageing}>
-        <RangeInput
-          title={locales.headOverlays.opacity}
-          min={settings.headOverlays.ageing.opacity.min}
-          max={settings.headOverlays.ageing.opacity.max}
-          factor={settings.headOverlays.ageing.opacity.factor}
-          defaultValue={data.headOverlays.ageing.opacity}
-          clientValue={storedData.headOverlays.ageing.opacity}
-          onChange={value => handleHeadOverlayChange('ageing', 'opacity', value)}
-        />
+      <Item title={locales.headOverlays.eyeColor}>
         <Input
           title={locales.headOverlays.style}
-          min={settings.headOverlays.ageing.style.min}
-          max={settings.headOverlays.ageing.style.max}
-          defaultValue={data.headOverlays.ageing.style}
-          clientValue={storedData.headOverlays.ageing.style}
-          onChange={value => handleHeadOverlayChange('ageing', 'style', value)}
+          min={settings.eyeColor.min}
+          max={settings.eyeColor.max}
+          defaultValue={data.eyeColor}
+          clientValue={storedData.eyeColor}
+          onChange={value => handleEyeColorChange(value)}
         />
       </Item>
       <Item title={locales.headOverlays.makeUp}>
@@ -266,6 +212,96 @@ const HeadOverlays = ({
           onChange={value => handleHeadOverlayChange('blush', 'color', value)}
         />
       </Item>
+      <Item title={locales.headOverlays.lipstick}>
+        <RangeInput
+          title={locales.headOverlays.opacity}
+          min={settings.headOverlays.lipstick.opacity.min}
+          max={settings.headOverlays.lipstick.opacity.max}
+          factor={settings.headOverlays.lipstick.opacity.factor}
+          defaultValue={data.headOverlays.lipstick.opacity}
+          clientValue={storedData.headOverlays.lipstick.opacity}
+          onChange={value => handleHeadOverlayChange('lipstick', 'opacity', value)}
+        />
+        <Input
+          title={locales.headOverlays.style}
+          min={settings.headOverlays.lipstick.style.min}
+          max={settings.headOverlays.lipstick.style.max}
+          defaultValue={data.headOverlays.lipstick.style}
+          clientValue={storedData.headOverlays.lipstick.style}
+          onChange={value => handleHeadOverlayChange('lipstick', 'style', value)}
+        />
+        <ColorInput
+          title={locales.headOverlays.color}
+          colors={settings.headOverlays.lipstick.color?.items}
+          defaultValue={data.headOverlays.lipstick.color}
+          clientValue={storedData.headOverlays.lipstick.color}
+          onChange={value => handleHeadOverlayChange('lipstick', 'color', value)}
+        />
+      </Item>
+      <Item title={locales.headOverlays.beard}>
+        <RangeInput
+          title={locales.headOverlays.opacity}
+          min={settings.headOverlays.beard.opacity.min}
+          max={settings.headOverlays.beard.opacity.max}
+          factor={settings.headOverlays.beard.opacity.factor}
+          defaultValue={data.headOverlays.beard.opacity}
+          clientValue={storedData.headOverlays.beard.opacity}
+          onChange={value => handleHeadOverlayChange('beard', 'opacity', value)}
+        />
+        <Input
+          title={locales.headOverlays.style}
+          min={settings.headOverlays.beard.style.min}
+          max={settings.headOverlays.beard.style.max}
+          defaultValue={data.headOverlays.beard.style}
+          clientValue={storedData.headOverlays.beard.style}
+          onChange={value => handleHeadOverlayChange('beard', 'style', value)}
+        />
+        <ColorInput
+          title={locales.headOverlays.color}
+          colors={settings.headOverlays.beard.color?.items}
+          defaultValue={data.headOverlays.beard.color}
+          clientValue={storedData.headOverlays.beard.color}
+          onChange={value => handleHeadOverlayChange('beard', 'color', value)}
+        />
+      </Item>
+      <Item title={locales.headOverlays.blemishes}>
+        <RangeInput
+          title={locales.headOverlays.opacity}
+          min={settings.headOverlays.blemishes.opacity.min}
+          max={settings.headOverlays.blemishes.opacity.max}
+          factor={settings.headOverlays.blemishes.opacity.factor}
+          defaultValue={data.headOverlays.blemishes.opacity}
+          clientValue={storedData.headOverlays.blemishes.opacity}
+          onChange={value => handleHeadOverlayChange('blemishes', 'opacity', value)}
+        />
+        <Input
+          title={locales.headOverlays.style}
+          min={settings.headOverlays.blemishes.style.min}
+          max={settings.headOverlays.blemishes.style.max}
+          defaultValue={data.headOverlays.blemishes.style}
+          clientValue={storedData.headOverlays.blemishes.style}
+          onChange={value => handleHeadOverlayChange('blemishes', 'style', value)}
+        />
+      </Item>
+      <Item title={locales.headOverlays.ageing}>
+        <RangeInput
+          title={locales.headOverlays.opacity}
+          min={settings.headOverlays.ageing.opacity.min}
+          max={settings.headOverlays.ageing.opacity.max}
+          factor={settings.headOverlays.ageing.opacity.factor}
+          defaultValue={data.headOverlays.ageing.opacity}
+          clientValue={storedData.headOverlays.ageing.opacity}
+          onChange={value => handleHeadOverlayChange('ageing', 'opacity', value)}
+        />
+        <Input
+          title={locales.headOverlays.style}
+          min={settings.headOverlays.ageing.style.min}
+          max={settings.headOverlays.ageing.style.max}
+          defaultValue={data.headOverlays.ageing.style}
+          clientValue={storedData.headOverlays.ageing.style}
+          onChange={value => handleHeadOverlayChange('ageing', 'style', value)}
+        />
+      </Item>
       <Item title={locales.headOverlays.complexion}>
         <RangeInput
           title={locales.headOverlays.opacity}
@@ -302,32 +338,6 @@ const HeadOverlays = ({
           defaultValue={data.headOverlays.sunDamage.style}
           clientValue={storedData.headOverlays.sunDamage.style}
           onChange={value => handleHeadOverlayChange('sunDamage', 'style', value)}
-        />
-      </Item>
-      <Item title={locales.headOverlays.lipstick}>
-        <RangeInput
-          title={locales.headOverlays.opacity}
-          min={settings.headOverlays.lipstick.opacity.min}
-          max={settings.headOverlays.lipstick.opacity.max}
-          factor={settings.headOverlays.lipstick.opacity.factor}
-          defaultValue={data.headOverlays.lipstick.opacity}
-          clientValue={storedData.headOverlays.lipstick.opacity}
-          onChange={value => handleHeadOverlayChange('lipstick', 'opacity', value)}
-        />
-        <Input
-          title={locales.headOverlays.style}
-          min={settings.headOverlays.lipstick.style.min}
-          max={settings.headOverlays.lipstick.style.max}
-          defaultValue={data.headOverlays.lipstick.style}
-          clientValue={storedData.headOverlays.lipstick.style}
-          onChange={value => handleHeadOverlayChange('lipstick', 'style', value)}
-        />
-        <ColorInput
-          title={locales.headOverlays.color}
-          colors={settings.headOverlays.lipstick.color?.items}
-          defaultValue={data.headOverlays.lipstick.color}
-          clientValue={storedData.headOverlays.lipstick.color}
-          onChange={value => handleHeadOverlayChange('lipstick', 'color', value)}
         />
       </Item>
       <Item title={locales.headOverlays.moleAndFreckles}>
@@ -392,16 +402,6 @@ const HeadOverlays = ({
           defaultValue={data.headOverlays.bodyBlemishes.style}
           clientValue={storedData.headOverlays.bodyBlemishes.style}
           onChange={value => handleHeadOverlayChange('bodyBlemishes', 'style', value)}
-        />
-      </Item>
-      <Item title={locales.headOverlays.eyeColor}>
-        <Input
-          title={locales.headOverlays.style}
-          min={settings.eyeColor.min}
-          max={settings.eyeColor.max}
-          defaultValue={data.eyeColor}
-          clientValue={storedData.eyeColor}
-          onChange={value => handleEyeColorChange(value)}
         />
       </Item>
       </>
