@@ -116,6 +116,12 @@ interface ComponentSettings {
     min: number;
     max: number;
   };
+  blacklist: BlacklistSetting;
+}
+
+interface BlacklistSetting {
+  drawables: number[];
+  textures: number[];
 }
 
 interface PropSettings {
@@ -237,6 +243,29 @@ interface CameraState {
 interface RotateState {
   left: boolean;
   right: boolean;
+}
+
+interface BlacklistItem {
+  drawable: number;
+  textures?: number[];
+}
+
+interface ClothingBlacklist {
+  masks: BlacklistItem[]; // 1
+  upperBody: BlacklistItem[]; // 3
+  lowerBody: BlacklistItem[]; // 4
+  bags: BlacklistItem[]; // 5
+  shoes: BlacklistItem[]; // 6
+  scarfAndChains: BlacklistItem[]; // 7
+  shirts: BlacklistItem[]; // 8
+  bodyArmor: BlacklistItem[]; // 9
+  decals: BlacklistItem[]; // 10
+  jackets: BlacklistItem[]; // 11
+}
+
+interface ClothingBlacklistSettings {
+  male: ClothingBlacklist;
+  female: ClothingBlacklist;
 }
 
 interface Tattoo {

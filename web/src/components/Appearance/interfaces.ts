@@ -99,6 +99,12 @@ export interface ComponentSettings {
     min: number;
     max: number;
   };
+  blacklist: BlacklistSetting;
+}
+
+interface BlacklistSetting {
+  drawables: number[];
+  textures: number[];
 }
 
 export interface PropSettings {

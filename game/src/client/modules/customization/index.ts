@@ -7,9 +7,17 @@ import {
   DATA_CLOTHES,
 } from '../../constants';
 
-import { pedModels, getPedAppearance, setPlayerAppearance, totalTattoos } from '../../index';
+import {
+  pedModels,
+  getPedAppearance,
+  setPlayerAppearance,
+  totalTattoos,
+  clothingBlacklistSettings,
+} from '../../index';
 
-import { arrayToVector3, isPedMale, Delay } from '../../utils';
+
+
+import { arrayToVector3, isPedMale, Delay, isPedFreemodeModel } from '../../utils';
 
 import { registerNuiCallbacks } from './nui';
 
@@ -85,8 +93,77 @@ export function getAppearance(): PedAppearance {
   return playerAppearance;
 }
 
+function getBlacklistSettingsForComponent(items: BlacklistItem[], drawableId: number) {
+  var blacklistSettings: BlacklistSetting = {
+    drawables: [],
+    textures: [],
+  };
+
+  for (var i = 0; i < items.length; i++) {
+    if (items[i].drawable === drawableId && items[i].textures !== undefined) {
+      for (var j = 0; j < items[i].textures.length; j++) {
+        blacklistSettings.textures.push(items[i].textures[j]);
+      }
+    }
+    if (items[i].textures === undefined || items[i].textures.length == 0) {
+      blacklistSettings.drawables.push(items[i].drawable);
+    }
+  }
+
+  return blacklistSettings;
+}
+
 export function getComponentSettings(ped: number, componentId: number): ComponentSettings {
   const drawableId = GetPedDrawableVariation(ped, componentId);
+  const isMale = isPedMale(ped);
+
+  var blacklistSettings: BlacklistSetting = {
+    drawables: [],
+    textures: [],
+  };
+
+  var genderBlacklistSettings = clothingBlacklistSettings.male;
+  if (!isMale) {
+    genderBlacklistSettings = clothingBlacklistSettings.female;
+  }
+
+  if(isPedFreemodeModel(ped)) {
+    switch (componentId) {
+      case 1:
+        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.masks, drawableId);
+        break;
+      case 3:
+        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.upperBody, drawableId);
+        break;
+      case 4:
+        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.lowerBody, drawableId);
+        break;
+      case 5:
+        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.bags, drawableId);
+        break;
+      case 6:
+        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.shoes, drawableId);
+        break;
+      case 7:
+        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.scarfAndChains, drawableId);
+        break;
+      case 8:
+        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.shirts, drawableId);
+        break;
+      case 9:
+        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.bodyArmor, drawableId);
+        break;
+      case 10:
+        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.decals, drawableId);
+        break;
+      case 11:
+        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.jackets, drawableId);
+        break;
+  
+      default:
+        break;
+    }
+  }
 
   const settings = {
     component_id: componentId,
@@ -98,6 +175,7 @@ export function getComponentSettings(ped: number, componentId: number): Componen
       min: 0,
       max: GetNumberOfPedTextureVariations(ped, componentId, drawableId) - 1,
     },
+    blacklist: blacklistSettings,
   };
 
   return settings;
@@ -137,7 +215,7 @@ export function getHairSettings(ped: number, hair: PedHair): HairSettings {
     texture: {
       min: 0,
       max: GetNumberOfPedTextureVariations(ped, 2, hair.style) - 1,
-    }
+    },
   };
 
   return settings;
@@ -244,7 +322,7 @@ export function getAppearanceSettings(): AppearanceSettings {
     texture: {
       min: 0,
       max: GetNumberOfPedTextureVariations(playerPed, 2, GetPedDrawableVariation(playerPed, 2)) - 1,
-    }
+    },
   };
 
   const eyeColor: EyeColorSettings = {
@@ -452,7 +530,8 @@ export async function wearClothes(data: PedAppearance, typeClothes: string): Pro
       for (let j = 0; j < components.length; j++) {
         const { component_id, drawable, texture } = components[j];
         // eslint-disable-next-line prettier/prettier
-        if (component_id === componentId) SetPedComponentVariation(playerPed, componentId, drawable, texture, 2);
+        if (component_id === componentId)
+          SetPedComponentVariation(playerPed, componentId, drawable, texture, 2);
       }
     }
   } else {
@@ -461,7 +540,8 @@ export async function wearClothes(data: PedAppearance, typeClothes: string): Pro
       for (let j = 0; j < components.length; j++) {
         const { component_id, drawable, texture } = components[j];
         // eslint-disable-next-line prettier/prettier
-        if (component_id === componentId) SetPedComponentVariation(playerPed, componentId, drawable, texture, 2);
+        if (component_id === componentId)
+          SetPedComponentVariation(playerPed, componentId, drawable, texture, 2);
       }
     }
   }

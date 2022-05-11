@@ -1,0 +1,55 @@
+{
+  "male": {
+    "masks": [
+      {
+        "drawable": 10
+      },
+      {
+        "drawable": 11
+      },
+      {
+        "drawable": 12
+      },
+      {
+        "drawable": 13
+      },
+      {
+        "drawable": 14,
+        "textures": [5, 7, 10, 11, 12, 13]
+      }
+    ],
+    "upperBody": [],
+    "lowerBody": [],
+    "bags": [],
+    "shoes": [],
+    "scarfAndChains": [],
+    "shirts": [],
+    "bodyArmor": [],
+    "decals": [],
+    "jackets": [
+      {
+        "drawable": 10,
+        "textures": [1, 2, 3]
+      },
+      {
+        "drawable": 11,
+        "textures": [1, 2, 3]
+      },
+      {
+        "drawable": 15
+      }
+    ]
+  },
+  "female": {
+    "masks": [],
+    "upperBody": [],
+    "lowerBody": [],
+    "bags": [],
+    "shoes": [],
+    "scarfAndChains": [],
+    "shirts": [],
+    "bodyArmor": [],
+    "decals": [],
+    "jackets": []
+  }
+}

@@ -23,6 +23,10 @@ export const pedModels: string[] = JSON.parse(
   LoadResourceFile(GetCurrentResourceName(), 'peds.json'),
 );
 
+export const clothingBlacklistSettings: ClothingBlacklistSettings = JSON.parse(
+  LoadResourceFile(GetCurrentResourceName(), 'blacklist.json'),
+);
+
 const pedModelsByHash = pedModels.reduce((object, model) => {
   return { ...object, [GetHashKey(model)]: model };
 }, {});
