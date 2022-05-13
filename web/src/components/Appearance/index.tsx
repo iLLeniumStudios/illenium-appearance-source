@@ -447,6 +447,22 @@ const Appearance = () => {
     [data, setData],
   );
 
+  const handleClearTattoos = useCallback(
+    async () => {
+      if (!data) return;
+      const { tattoos } = data;
+      const updatedTattoos = { ...tattoos };
+      for (var zone in updatedTattoos) {
+        if (zone !== "ZONE_HAIR") {
+          updatedTattoos[zone] = [];
+        }
+      }
+      await Nui.post('appearance_delete_tattoo', updatedTattoos);
+      setData({ ...data, tattoos: updatedTattoos });
+    },
+    [data, setData],
+  );
+
   useEffect(() => {
     Nui.post('appearance_get_locales').then(result => setLocales(JSON.parse(result)));
 
@@ -573,6 +589,7 @@ const Appearance = () => {
                       handleApplyTattoo={handleApplyTattoo}
                       handlePreviewTattoo={handlePreviewTattoo}
                       handleDeleteTattoo={handleDeleteTattoo}
+                      handleClearTattoos={handleClearTattoos}
                     />
                   )}
                 </Container>

@@ -134,5 +134,6 @@ export default interface Locales {
     };
     apply: string;
     delete: string;
+    deleteAll: string;
   };
 }

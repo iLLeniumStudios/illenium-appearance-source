@@ -5,6 +5,7 @@ import { FlexWrapper } from './styles';
 import SelectTattoo from './components/SelectTattoo';
 
 import { TattoosSettings, TattooList, Tattoo } from './interfaces';
+import Button from './components/Button';
 
 interface TattoosProps {
   settings: TattoosSettings;
@@ -12,9 +13,10 @@ interface TattoosProps {
   handleApplyTattoo: (value: Tattoo) => void;
   handlePreviewTattoo: (value: Tattoo) => void;
   handleDeleteTattoo: (value: Tattoo) => void;
+  handleClearTattoos: () => void;
 }
 
-const Tattoos = ({ settings, data, handleApplyTattoo, handlePreviewTattoo, handleDeleteTattoo }: TattoosProps) => {
+const Tattoos = ({ settings, data, handleApplyTattoo, handlePreviewTattoo, handleDeleteTattoo, handleClearTattoos }: TattoosProps) => {
   const { locales } = useNuiState();
 
   const { items } = settings;
@@ -41,6 +43,7 @@ const Tattoos = ({ settings, data, handleApplyTattoo, handlePreviewTattoo, handl
           </FlexWrapper>
         </Item>
       ))}
+      <Button onClick={() => handleClearTattoos()}>{locales.tattoos.deleteAll}</Button>
     </Section>
   );
 };
