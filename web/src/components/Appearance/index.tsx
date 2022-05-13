@@ -16,6 +16,8 @@ import {
   CameraState,
   ClothesState,
   Tattoo,
+  TattooList,
+  TattoosSettings,
 } from './interfaces';
 
 import {
@@ -412,6 +414,30 @@ const Appearance = () => {
     return data.model === 'mp_m_freemode_01' || data.model === 'mp_f_freemode_01';
   }, [data]);
 
+  const isPedMale = useMemo(() => {
+    if(!data) return;
+
+    if (data.model === 'mp_m_freemode_01') {
+      return true;
+    }
+
+    return false
+  }, [data]);
+
+  const filterTattoos = (tattooSettings: TattoosSettings) => {
+    for(const zone in tattooSettings.items) {
+      console.log(zone);
+      tattooSettings.items[zone] = tattooSettings.items[zone].filter(tattoo => {
+        if(isPedMale && tattoo.hashMale !== "") {
+          return tattoo;
+        } else if(!isPedMale && tattoo.hashFemale !== "") {
+          return tattoo;
+        }
+      })
+    }
+    return tattooSettings;
+  };
+
   const handleApplyTattoo = useCallback(
     async (tattoo: Tattoo) => {
       if (!data) return;
@@ -584,7 +610,7 @@ const Appearance = () => {
                   )}
                   {isPedFreemodeModel && config.tattoos && (
                     <Tattoos
-                      settings={appearanceSettings.tattoos}
+                      settings={filterTattoos(appearanceSettings.tattoos)}
                       data={data.tattoos}
                       handleApplyTattoo={handleApplyTattoo}
                       handlePreviewTattoo={handlePreviewTattoo}
