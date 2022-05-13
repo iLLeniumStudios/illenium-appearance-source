@@ -81,12 +81,13 @@
       "style": "Estilo",
       "color": "Color",
       "highlight": "Resalte",
-      "texture": "Color"
+      "texture": "Textura",
+      "fade": "Degradado"
     },
     "opacity": "Opacidad",
     "style": "Estilo",
     "color": "Color",
-    "secondColor": "Color base",
+    "secondColor": "Color secundario",
     "blemishes": "Manchas",
     "beard": "Barba",
     "eyebrows": "Cejas",
@@ -103,8 +104,8 @@
   },
   "components": {
     "title": "Ropa",
-    "drawable": "Base",
-    "texture": "Color",
+    "drawable": "Prenda",
+    "texture": "Textura",
     "mask": "Máscara",
     "upperBody": "Brazos",
     "lowerBody": "Piernas",
@@ -118,8 +119,8 @@
   },
   "props": {
     "title": "Accesorios",
-    "drawable": "Base",
-    "texture": "Color",
+    "drawable": "Prenda",
+    "texture": "Textura",
     "hats": "Gorras y Cascos",
     "glasses": "Gafas",
     "ear": "Aretes",
@@ -137,6 +138,7 @@
       "ZONE_RIGHT_LEG": "Pierna derecha"
     },
     "apply": "Aplicar",
-    "delete": "Borrar"
+    "delete": "Borrar",
+    "deleteAll": "Borrar todo"
   }
 }

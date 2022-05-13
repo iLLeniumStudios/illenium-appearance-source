@@ -426,7 +426,6 @@ const Appearance = () => {
 
   const filterTattoos = (tattooSettings: TattoosSettings) => {
     for(const zone in tattooSettings.items) {
-      console.log(zone);
       tattooSettings.items[zone] = tattooSettings.items[zone].filter(tattoo => {
         if(isPedMale && tattoo.hashMale !== "") {
           return tattoo;
