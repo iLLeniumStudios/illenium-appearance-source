@@ -1,7 +1,7 @@
 import { useNuiState } from '../../hooks/nuiState';
 import Section from './components/Section';
 import Item from './components/Item';
-import { FlexWrapper } from './styles';
+import { Container, FlexWrapper } from './styles';
 import SelectTattoo from './components/SelectTattoo';
 
 import { TattoosSettings, TattooList, Tattoo } from './interfaces';
@@ -43,7 +43,11 @@ const Tattoos = ({ settings, data, handleApplyTattoo, handlePreviewTattoo, handl
           </FlexWrapper>
         </Item>
       ))}
-      <Button onClick={() => handleClearTattoos()}>{locales.tattoos.deleteAll}</Button>
+      <Item>
+      <FlexWrapper>
+          <Button onClick={() => handleClearTattoos()} width="100%">{locales.tattoos.deleteAll}</Button>
+      </FlexWrapper>
+      </Item>
     </Section>
   );
 };
