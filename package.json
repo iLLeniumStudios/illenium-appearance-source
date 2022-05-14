@@ -7,6 +7,9 @@
   "scripts": {
     "build:game": "cd game && yarn && yarn build",
     "build:web": "cd web && yarn && yarn build",
+    "format:game": "cd game && yarn && yarn format",
+    "format:web": "cd web && yarn && yarn format",
+    "format": "yarn format:game && yarn format:web",
     "build": "yarn build:game && yarn build:web",
     "release": "yarn build && node release.js"
   }

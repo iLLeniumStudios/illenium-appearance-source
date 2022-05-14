@@ -21,6 +21,7 @@
     "start": "cross-env VITE_ENV=development vite",
     "build": "cross-env VITE_ENV=production tsc && vite build",
     "build-game": "cross-env VITE_ENV=game tsc && vite build",
+    "format": "prettier --write \"src/**/*.ts\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
