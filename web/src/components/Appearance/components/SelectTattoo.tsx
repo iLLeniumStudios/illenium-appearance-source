@@ -124,11 +124,11 @@ const SelectTattoo = ({
 
   const onMenuOpen = () => {
     setTimeout(() => {
-      const selectedEl = document.getElementsByClassName("TattooDropdown__option--is-selected")[0];
+      const selectedEl = document.getElementsByClassName("TattooDropdown" + items[0].zone + "__option--is-selected")[0];
       if (selectedEl) {
-        selectedEl.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+        selectedEl.scrollIntoView({ behavior: 'auto', block: 'start', inline: 'nearest' });
       }
-    }, 15);
+    }, 100);
   };
 
   const isTattooApplied = useCallback(() => {
@@ -156,8 +156,8 @@ const SelectTattoo = ({
         value={{ value: currentTattoo, label }}
         onChange={handleChange}
         onMenuOpen={onMenuOpen}
-        className={"TattooDropdown"}
-        classNamePrefix={"TattooDropdown"}
+        className={"TattooDropdown" + items[0].zone}
+        classNamePrefix={"TattooDropdown" + items[0].zone}
         menuPortalTarget={document.body}
         menuShouldScrollIntoView={true}
       />
