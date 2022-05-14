@@ -15,8 +15,6 @@ import {
   clothingBlacklistSettings,
 } from '../../index';
 
-
-
 import { arrayToVector3, isPedMale, Delay, isPedFreemodeModel } from '../../utils';
 
 import { registerNuiCallbacks } from './nui';
@@ -93,8 +91,8 @@ export function getAppearance(): PedAppearance {
   return playerAppearance;
 }
 
-function getBlacklistSettingsForComponent(items: BlacklistItem[], drawableId: number) {
-  var blacklistSettings: BlacklistSetting = {
+function filterBlacklistSettings(items: BlacklistItem[], drawableId: number) {
+  var blacklistSettings: BlacklistSettings = {
     drawables: [],
     textures: [],
   };
@@ -113,56 +111,77 @@ function getBlacklistSettingsForComponent(items: BlacklistItem[], drawableId: nu
   return blacklistSettings;
 }
 
+function componentBlacklistMap(isMale: boolean, componentId: number) {
+  let genderSettings = clothingBlacklistSettings.male.components;
+  if (!isMale) {
+    genderSettings = clothingBlacklistSettings.female.components;
+  }
+
+  switch (componentId) {
+    case 1:
+      return genderSettings.masks;
+    case 3:
+      return genderSettings.upperBody;
+    case 4:
+      return genderSettings.lowerBody;
+    case 5:
+      return genderSettings.bags;
+    case 6:
+      return genderSettings.shoes;
+    case 7:
+      return genderSettings.scarfAndChains;
+    case 8:
+      return genderSettings.shirts;
+    case 9:
+      return genderSettings.bodyArmor;
+    case 10:
+      return genderSettings.decals;
+    case 11:
+      return genderSettings.jackets;
+
+    default:
+      break;
+  }
+  return [];
+}
+
+function propBlacklistMap(isMale: boolean, propId: number) {
+  let genderSettings = clothingBlacklistSettings.male.props;
+  if (!isMale) {
+    genderSettings = clothingBlacklistSettings.female.props;
+  }
+
+  switch (propId) {
+    case 0:
+      return genderSettings.hats;
+    case 1:
+      return genderSettings.glasses;
+    case 2:
+      return genderSettings.ear;
+    case 6:
+      return genderSettings.watches;
+    case 7:
+      return genderSettings.bracelets;
+    default:
+      break;
+  }
+  return [];
+}
+
 export function getComponentSettings(ped: number, componentId: number): ComponentSettings {
   const drawableId = GetPedDrawableVariation(ped, componentId);
   const isMale = isPedMale(ped);
 
-  var blacklistSettings: BlacklistSetting = {
+  var blacklistSettings: BlacklistSettings = {
     drawables: [],
     textures: [],
   };
 
-  var genderBlacklistSettings = clothingBlacklistSettings.male;
-  if (!isMale) {
-    genderBlacklistSettings = clothingBlacklistSettings.female;
-  }
-
-  if(isPedFreemodeModel(ped)) {
-    switch (componentId) {
-      case 1:
-        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.masks, drawableId);
-        break;
-      case 3:
-        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.upperBody, drawableId);
-        break;
-      case 4:
-        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.lowerBody, drawableId);
-        break;
-      case 5:
-        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.bags, drawableId);
-        break;
-      case 6:
-        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.shoes, drawableId);
-        break;
-      case 7:
-        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.scarfAndChains, drawableId);
-        break;
-      case 8:
-        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.shirts, drawableId);
-        break;
-      case 9:
-        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.bodyArmor, drawableId);
-        break;
-      case 10:
-        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.decals, drawableId);
-        break;
-      case 11:
-        blacklistSettings = getBlacklistSettingsForComponent(genderBlacklistSettings.jackets, drawableId);
-        break;
-  
-      default:
-        break;
-    }
+  if (isPedFreemodeModel(ped)) {
+    blacklistSettings = filterBlacklistSettings(
+      componentBlacklistMap(isMale, componentId),
+      drawableId,
+    );
   }
 
   const settings = {
@@ -183,6 +202,16 @@ export function getComponentSettings(ped: number, componentId: number): Componen
 
 export function getPropSettings(ped: number, propId: number): PropSettings {
   const drawableId = GetPedPropIndex(ped, propId);
+  const isMale = isPedMale(ped);
+
+  var blacklistSettings: BlacklistSettings = {
+    drawables: [],
+    textures: [],
+  };
+
+  if (isPedFreemodeModel(ped)) {
+    blacklistSettings = filterBlacklistSettings(propBlacklistMap(isMale, propId), drawableId);
+  }
 
   const settings = {
     prop_id: propId,
@@ -194,6 +223,7 @@ export function getPropSettings(ped: number, propId: number): PropSettings {
       min: -1,
       max: GetNumberOfPedPropTextureVariations(ped, propId, drawableId) - 1,
     },
+    blacklist: blacklistSettings,
   };
 
   return settings;

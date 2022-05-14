@@ -55,7 +55,7 @@ export const EventListener = () => {
   });
 
   window.addEventListener('keydown', e => {
-    if(e.key === 'd') {
+    if (e.key === 'd') {
       Nui.post('rotate_right');
     } else if (e.key === 'a') {
       Nui.post('rotate_left');

@@ -116,10 +116,10 @@ interface ComponentSettings {
     min: number;
     max: number;
   };
-  blacklist: BlacklistSetting;
+  blacklist: BlacklistSettings;
 }
 
-interface BlacklistSetting {
+interface BlacklistSettings {
   drawables: number[];
   textures: number[];
 }
@@ -134,6 +134,7 @@ interface PropSettings {
     min: number;
     max: number;
   };
+  blacklist: BlacklistSettings;
 }
 
 interface HeadBlendSettings {
@@ -204,7 +205,7 @@ interface HairSettings {
   texture: {
     min: number;
     max: number;
-  }
+  };
 }
 
 interface EyeColorSettings {
@@ -251,6 +252,19 @@ interface BlacklistItem {
 }
 
 interface ClothingBlacklist {
+  components: BlacklistComponents;
+  props: BlacklistProps;
+}
+
+interface BlacklistProps {
+  hats: BlacklistItem[]; // 0
+  glasses: BlacklistItem[]; // 1
+  ear: BlacklistItem[]; // 2
+  watches: BlacklistItem[]; // 6
+  bracelets: BlacklistItem[]; // 7
+}
+
+interface BlacklistComponents {
   masks: BlacklistItem[]; // 1
   upperBody: BlacklistItem[]; // 3
   lowerBody: BlacklistItem[]; // 4

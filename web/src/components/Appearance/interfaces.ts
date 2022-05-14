@@ -99,10 +99,10 @@ export interface ComponentSettings {
     min: number;
     max: number;
   };
-  blacklist: BlacklistSetting;
+  blacklist: BlacklistSettings;
 }
 
-interface BlacklistSetting {
+interface BlacklistSettings {
   drawables: number[];
   textures: number[];
 }
@@ -117,6 +117,7 @@ export interface PropSettings {
     min: number;
     max: number;
   };
+  blacklist: BlacklistSettings;
 }
 
 export interface HeadBlendSettings {
@@ -187,7 +188,7 @@ export interface HairSettings {
   texture: {
     min: number;
     max: number;
-  }
+  };
 }
 
 export interface EyeColorSettings {

@@ -117,11 +117,15 @@ function getPedHeadOverlays(ped: number): PedHeadOverlays {
     const normalizedOpacity = hasOverlay ? parseFloat(opacity.toFixed(1)) : 0;
     let overlayData;
 
-    if(overlay === 'makeUp') {
-      overlayData = { style: safeValue, opacity: normalizedOpacity, color: firstColor, secondColor: secondColor }
-    }
-    else {
-      overlayData = { style: safeValue, opacity: normalizedOpacity, color: firstColor }
+    if (overlay === 'makeUp') {
+      overlayData = {
+        style: safeValue,
+        opacity: normalizedOpacity,
+        color: firstColor,
+        secondColor: secondColor,
+      };
+    } else {
+      overlayData = { style: safeValue, opacity: normalizedOpacity, color: firstColor };
     }
 
     return {
@@ -264,7 +268,7 @@ export function setPedHeadOverlays(ped: number, headOverlays: PedHeadOverlays): 
         colorType = 2;
       }
 
-      if(key === 'makeUp') {
+      if (key === 'makeUp') {
         secondColor = headOverlay.secondColor;
       }
 
