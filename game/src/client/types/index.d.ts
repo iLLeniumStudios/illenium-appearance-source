@@ -247,8 +247,10 @@ interface RotateState {
 }
 
 interface BlacklistItem {
-  drawable: number;
+  drawables?: number[];
   textures?: number[];
+  jobs?: string[];
+  gangs?: string[];
 }
 
 interface ClothingBlacklist {

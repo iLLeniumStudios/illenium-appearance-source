@@ -13,6 +13,8 @@ import {
   setPlayerAppearance,
   totalTattoos,
   clothingBlacklistSettings,
+  getPlayerJob,
+  getPlayerGang,
 } from '../../index';
 
 import { arrayToVector3, isPedMale, Delay, isPedFreemodeModel } from '../../utils';
@@ -91,20 +93,40 @@ export function getAppearance(): PedAppearance {
   return playerAppearance;
 }
 
+function addToBlacklist(
+  item: BlacklistItem,
+  drawable: number,
+  drawableId: number,
+  blacklistSettings: BlacklistSettings,
+) {
+  if (drawable === drawableId && item.textures !== undefined) {
+    for (let k = 0; k < item.textures.length; k++) {
+      blacklistSettings.textures.push(item.textures[k]);
+    }
+  }
+  if (item.textures === undefined || item.textures.length === 0) {
+    blacklistSettings.drawables.push(drawable);
+  }
+}
+
 function filterBlacklistSettings(items: BlacklistItem[], drawableId: number) {
   var blacklistSettings: BlacklistSettings = {
     drawables: [],
     textures: [],
   };
 
-  for (var i = 0; i < items.length; i++) {
-    if (items[i].drawable === drawableId && items[i].textures !== undefined) {
-      for (var j = 0; j < items[i].textures.length; j++) {
-        blacklistSettings.textures.push(items[i].textures[j]);
-      }
+  const job = getPlayerJob();
+  const gang = getPlayerGang();
+
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    if ((item.jobs && item.jobs.includes(job)) || (item.gangs && item.gangs.includes(gang))) {
+      continue;
     }
-    if (items[i].textures === undefined || items[i].textures.length == 0) {
-      blacklistSettings.drawables.push(items[i].drawable);
+    if (item.drawables) {
+      for (let j = 0; j < item.drawables.length; j++) {
+        addToBlacklist(item, item.drawables[j], drawableId, blacklistSettings);
+      }
     }
   }
 

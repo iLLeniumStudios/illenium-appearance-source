@@ -15,6 +15,25 @@ const exp = (global as any).exports;
 
 const GET_PED_HEAD_BLEND_DATA = '0x2746bd9d88c5c5d0';
 
+let playerJob = '';
+let playerGang = '';
+
+on('updateJob', (job: string) => {
+  playerJob = job;
+});
+
+on('updateGang', (gang: string) => {
+  playerGang = gang;
+});
+
+export function getPlayerJob(): string {
+  return playerJob;
+}
+
+export function getPlayerGang(): string {
+  return playerGang;
+}
+
 export const totalTattoos: TattooList = JSON.parse(
   LoadResourceFile(GetCurrentResourceName(), 'tattoos.json'),
 );
