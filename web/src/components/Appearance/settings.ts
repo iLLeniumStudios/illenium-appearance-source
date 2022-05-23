@@ -27,10 +27,13 @@ export const APPEARANCE_INITIAL_STATE: PedAppearance = {
   headBlend: {
     shapeFirst: 0,
     shapeSecond: 0,
+    shapeThird: 0,
     shapeMix: 0,
     skinFirst: 0,
     skinSecond: 0,
+    skinThird: 0,
     skinMix: 0,
+    thirdMix: 0,
   },
   faceFeatures: {
     noseWidth: 0,
@@ -244,11 +247,19 @@ export const SETTINGS_INITIAL_STATE: AppearanceSettings = {
       min: 0,
       max: 45,
     },
+    shapeThird: {
+      min: 0,
+      max: 45,
+    },
     skinFirst: {
       min: 0,
       max: 45,
     },
     skinSecond: {
+      min: 0,
+      max: 45,
+    },
+    skinThird: {
       min: 0,
       max: 45,
     },
@@ -258,6 +269,11 @@ export const SETTINGS_INITIAL_STATE: AppearanceSettings = {
       factor: 0.1,
     },
     skinMix: {
+      min: 0,
+      max: 10,
+      factor: 0.1,
+    },
+    thirdMix: {
       min: 0,
       max: 10,
       factor: 0.1,

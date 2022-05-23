@@ -29,6 +29,12 @@ export default interface Locales {
       secondOption: string;
       mix: string;
     };
+    race: {
+      title: string;
+      shape: string;
+      skin: string;
+      mix: string;
+    };
   };
   faceFeatures: {
     title: string;
