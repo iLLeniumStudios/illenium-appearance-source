@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { ReactNode } from 'react';
+import styled, { ThemeContext } from 'styled-components';
+import { ReactNode, useContext } from 'react';
 
 interface ItemProps {
   title?: string;
@@ -15,10 +15,10 @@ const Container = styled.div`
   padding: 10px;
   border-radius: 2px;
 
-  background: rgba(23, 23, 23, 0.3);
+  background: rgba(${props => props.theme.secondayBackground || '0, 0, 0'}, 0.3);
 
   span {
-    color: #fff;
+    color: rgba(${props => props.theme.fontColor || '255, 255, 255'}, 1);
     font-size: 14px;
   }
 `;
@@ -39,7 +39,7 @@ const Inputs = styled.div`
 
 const Item: React.FC<ItemProps> = ({ children, title }) => {
   return (
-    <Container>
+    <Container theme={useContext(ThemeContext)}>
       {title && <span>{title}</span>}
       <Inputs>{children}</Inputs>
     </Container>

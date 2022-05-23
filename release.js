@@ -4,7 +4,7 @@ const path = require("path");
 const RELEASE_PATH = path.resolve(__dirname, "release");
 const RESOURCE_PATH = path.resolve(RELEASE_PATH, "fivem-appearance");
 
-const FILES = ["fxmanifest.lua", "peds.json", "README.md", "LICENSE", "tattoos.json", "blacklist.json"];
+const FILES = ["fxmanifest.lua", "peds.json", "README.md", "LICENSE", "tattoos.json", "blacklist.json", "theme.json"];
 
 const TYPESCRIPT_BUILD_SRC = path.resolve(__dirname, "game", "dist");
 const UI_BUILD_SRC = path.resolve(__dirname, "web", "dist");

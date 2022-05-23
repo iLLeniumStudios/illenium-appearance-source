@@ -22,7 +22,7 @@ export const Wrapper = styled.div`
   text-transform: uppercase;
   text-shadow: 3px 3px rgba(0, 0, 0, 0.5);
 
-  background: rgba(23, 23, 23, 0.9);
+  background: rgba(${props => props.theme.secondaryBackground ||'0, 0, 0'}, 0.9);
 
   span {
     font-size: 1rem;
@@ -41,13 +41,13 @@ export const Buttons = styled.div`
     height: 40px;
     width: 100px;
     margin: 0 50px;
-    border-radius: 3vh;
+    border-radius: ${props => props.theme.borderRadius || '0px'};
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    color: #fff;
+    color: rgba(${props => props.theme.fontColor || '255, 255, 255'}, 1);;
     font-size: 1.5rem;
     font-weight: 400;
     text-transform: uppercase;
@@ -62,7 +62,7 @@ export const Buttons = styled.div`
       transform: scale(1.1);
       opacity: 1;
       text-shadow: 0px 2px 2px rgba(251, 255, 190, 0.2);
-      background: rgba(220, 20, 60, 0.9);
+      background: rgba(${props => props.theme.primaryBackground ||'0, 0, 0'}, 0.9);
     }
   }
 `;

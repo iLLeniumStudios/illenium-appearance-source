@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import styled, { css } from 'styled-components';
+import { useCallback, useContext } from 'react';
+import styled, { css, ThemeContext } from 'styled-components';
 
 interface ColorInputProps {
   title?: string;
@@ -46,8 +46,8 @@ const Button = styled.button<ButtonProps>`
 
   &:hover {
     border: 2px solid rgba(255, 255, 255, 0.5);
-    transition: background 0.2s;
-    transform: scale(1.1);
+    ${props => props.theme.smoothBackgroundTransition ? 'transition: background 0.2s;' : ''}
+    ${props => props.theme.scaleOnHover ? 'transform: scale(1.1);' : ''}
   }
 
   ${({ selected }) =>
@@ -66,7 +66,7 @@ const ColorInput: React.FC<ColorInputProps> = ({ title, colors = [], defaultValu
   );
 
   return (
-    <Container>
+    <Container theme={useContext(ThemeContext)}>
       <span>
         <small>{`${title}: ${defaultValue}`}</small>
         <small>{clientValue}</small>
@@ -74,6 +74,7 @@ const ColorInput: React.FC<ColorInputProps> = ({ title, colors = [], defaultValu
       <div>
         {colors.map((color, index) => (
           <Button
+            theme={useContext(ThemeContext)}
             key={index}
             style={{ backgroundColor: `rgb(${color[0]}, ${color[1]}, ${color[2]})` }}
             selected={defaultValue === index}

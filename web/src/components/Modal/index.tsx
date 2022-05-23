@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { ThemeContext } from 'styled-components';
 import { Wrapper, Buttons } from './styles';
 
 interface ModalProps {
@@ -11,10 +13,10 @@ interface ModalProps {
 
 const Modal = ({ title, description, accept, decline, handleAccept, handleDecline }: ModalProps) => {
   return (
-    <Wrapper>
+    <Wrapper theme={useContext(ThemeContext)}>
       <p>{title}</p>
       <span>{description}</span>
-      <Buttons>
+      <Buttons theme={useContext(ThemeContext)}>
         <button type="button" onClick={handleAccept}>
           {accept}
         </button>

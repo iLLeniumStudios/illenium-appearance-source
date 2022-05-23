@@ -1,5 +1,5 @@
-import { useCallback, useRef, useState } from 'react';
-import styled from 'styled-components';
+import { useCallback, useContext, useRef, useState } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 import Select from 'react-select';
 import { useNuiState } from '../../../hooks/nuiState';
 import Button from './Button';
@@ -146,6 +146,11 @@ const SelectTattoo = ({
   if (!locales) {
     return null;
   }
+
+  const themeContext = useContext(ThemeContext);
+  customStyles.control.background = `rgba(${themeContext.secondaryBackground || '0, 0, 0'}, 0.8)`;
+  customStyles.menu.background = `rgba(${themeContext.secondaryBackground || '0, 0, 0'}, 0.8)`;
+  customStyles.menuList.background = `rgba(${themeContext.secondaryBackground || '0, 0, 0'}, 0.8)`;
 
   return (
     <Container>

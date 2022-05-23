@@ -1,5 +1,5 @@
-import { useCallback, useRef } from 'react';
-import styled from 'styled-components';
+import { useCallback, useContext, useRef } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 
 interface RangeInputProps {
   title?: string;
@@ -41,7 +41,7 @@ const Container = styled.div`
     appearance: none;
     width: 100%;
     height: 15px;
-    background: rgba(23, 23, 23, 0.8);
+    background: rgba(${props => props.theme.secondayBackground || '0, 0, 0'}, 0.8);
     outline: none;
     opacity: 1;
     border-radius: 2px;
@@ -86,7 +86,7 @@ const RangeInput: React.FC<RangeInputProps> = ({
   );
 
   return (
-    <Container onClick={handleContainerClick}>
+    <Container onClick={handleContainerClick} theme={useContext(ThemeContext)}>
       <span>
         <small>
           {title}: {defaultValue}

@@ -1,5 +1,5 @@
-import { useCallback, useRef } from 'react';
-import styled from 'styled-components';
+import { useCallback, useContext, useRef } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { valueContainerCSS } from 'react-select/src/components/containers';
 
@@ -47,7 +47,7 @@ const Container = styled.div`
       align-items: center;
       justify-content: center;
 
-      color: #fff;
+      color: rgba(${props => props.theme.fontColor || '255, 255, 255'}, 1);
 
       outline: 0;
       border: none;
@@ -56,10 +56,10 @@ const Container = styled.div`
       background: rgba(23, 23, 23, 0.5);
 
       &:hover {
-        color: rgba(255, 255, 255, 1);
-        background: rgba(220, 20, 60, 0.9);
-        transition: background 0.2s;
-        transform: scale(1.1);
+        color: rgba(${props => props.theme.fontColorHover || '255, 255, 255'}, 1);
+        background: rgba(${props => props.theme.primaryBackground || '0, 0, 0'}, 0.9);
+        ${props => props.theme.smoothBackgroundTransition ? 'transition: background 0.2s;' : ''}
+        ${props => props.theme.scaleOnHover ? 'transform: scale(1.1);' : ''}
       }
     }
 
@@ -72,13 +72,13 @@ const Container = styled.div`
 
       text-align: center;
       font-size: 14px;
-      color: #fff;
+      color: rgba(${props => props.theme.fontColor || '255, 255, 255'}, 1);
 
       border: none;
       border-radius: 2px;
       margin: 0 2px;
 
-      background: rgba(23, 23, 23, 0.8);
+      background: rgba(${props => props.theme.secondaryBackground || '0, 0, 0'}, 0.8);
 
       &::-webkit-outer-spin-button,
       &::-webkit-inner-spin-button {
@@ -162,7 +162,7 @@ const Input: React.FC<InputProps> = ({ title, min = 0, max = 255, blacklisted = 
   );
 
   return (
-    <Container onClick={handleContainerClick}>
+    <Container onClick={handleContainerClick} theme={useContext(ThemeContext)}>
       <span>
         <small>{title}</small>
         <small>{clientValue} / {max}</small>

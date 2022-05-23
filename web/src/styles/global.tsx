@@ -1,12 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
-export default createGlobalStyle`
+export default createGlobalStyle<{theme: any}>`
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     outline: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: '${props => props.theme.fontFamily}', sans-serif;
   }
   
   body {

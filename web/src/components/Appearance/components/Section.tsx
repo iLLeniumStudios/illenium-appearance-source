@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, ReactNode } from 'react';
-import styled, { css } from 'styled-components';
+import { useState, useEffect, useRef, ReactNode, useContext } from 'react';
+import styled, { css, ThemeContext } from 'styled-components';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { useSpring, animated } from 'react-spring';
 
@@ -19,7 +19,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  color: #fff;
+  color: rgba(${props => props.theme.fontColor || '255, 255, 255'}, 1);
 
   user-select: none;
 
@@ -37,18 +37,18 @@ const Header = styled.div<HeaderProps>`
   justify-content: space-between;
 
   padding: 0 10px;
-  border-radius: 3vh;
+  border-radius: ${props => props.theme.borderRadius || '4px'};
 
   z-index: 2;
 
-  background: rgba(23, 23, 23, ${({ active }) => (active ? '0.9' : '0.7')});
+  background: rgba(${props => props.theme.secondaryBackground || '0, 0, 0'}, ${({ active }) => (active ? '0.9' : '0.7')});
 
   box-shadow: 0px 0px 5px rgb(0, 0, 0, 0.2);
 
   transition: background 0.1s;
 
   &:hover {
-    background: rgba(220, 20, 60, 0.9);
+    background: rgba(${props => props.theme.primaryBackground || '0, 0, 0'}, 0.9);
     transform: scale(1.05);
     transition: background 0.2s;
     cursor: pointer;
@@ -57,16 +57,16 @@ const Header = styled.div<HeaderProps>`
   ${({ active }) =>
     active &&
     css`
-      background: rgba(220, 20, 60);
+      background: rgba(${props => props.theme.primaryBackground || '0, 0, 0'}, 1);
       &:hover {
-        transition: background 0.2s;
-        background: rgba(220, 20, 60, 1);
+        ${props => props.theme.smoothBackgroundTransition ? 'transition: background 0.2s;' : ''}
+        background: rgba(${props => props.theme.primaryBackground || '0, 0, 0'}, 1);
       }
     `}
 
   span {
     font-size: 15px;
-    font-weight: bold;
+    font-weight: ${props => props.theme.sectionFontWeight || 'normal'};
   }
 `;
 
@@ -100,8 +100,8 @@ const Section: React.FC<SectionProps> = ({ children, title, deps = [] }) => {
   }, [ref, setHeight, deps]);
 
   return (
-    <Container>
-      <Header active={active} onClick={() => setActive(state => !state)}>
+    <Container theme={useContext(ThemeContext)}>
+      <Header active={active} onClick={() => setActive(state => !state)} theme={useContext(ThemeContext)}>
         <span>{title}</span>
         {active ? <FiChevronUp size={30} /> : <FiChevronDown size={30} />}
       </Header>

@@ -27,6 +27,7 @@ import {
   setPedEyeColor,
   setPedComponent,
   setPedProp,
+  themeConfiguration,
 } from '../../index';
 
 export function registerNuiCallbacks(): void {
@@ -54,6 +55,8 @@ export function registerNuiCallbacks(): void {
 
   RegisterNuiCallbackType('rotate_left');
   RegisterNuiCallbackType('rotate_right');
+
+  RegisterNuiCallbackType('get_theme_configuration');
 
   on('__cfx_nui:appearance_get_locales', (_: any, cb: (arg: any) => void): void => {
     const locales = LoadResourceFile(
@@ -209,5 +212,9 @@ export function registerNuiCallbacks(): void {
   on('__cfx_nui:rotate_right', (_: any, cb: (arg: any) => void): void => {
     cb({});
     pedTurn(PlayerPedId(), -10.0);
+  });
+
+  on('__cfx_nui:get_theme_configuration', (_: any, cb: (arg: any) => void): void => {
+    cb(themeConfiguration);
   });
 }

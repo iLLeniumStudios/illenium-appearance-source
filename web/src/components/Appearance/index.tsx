@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useContext } from 'react';
 import { useTransition as useTransitionAnimation, animated } from 'react-spring';
 import { useNuiState } from '../../hooks/nuiState';
 import Nui from '../../Nui';
@@ -39,6 +39,7 @@ import Modal from '../Modal';
 import Tattoos from './Tattoos';
 
 import { Wrapper, Container } from './styles';
+import { ThemeContext } from 'styled-components';
 
 if (!import.meta.env.PROD) {
   mock('appearance_get_settings_and_data', () => ({
@@ -533,7 +534,7 @@ const Appearance = () => {
           item && (
             <animated.div key={key} style={style}>
               <Wrapper>
-                <Container>
+                <Container theme={useContext(ThemeContext)}>
                   {config.ped && (
                     <Ped
                       settings={appearanceSettings.ped}

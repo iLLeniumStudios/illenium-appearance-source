@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect, ReactElement, useCallback, ReactNode } from 'react';
-import styled, { css } from 'styled-components';
+import { useState, useRef, useEffect, ReactElement, useCallback, ReactNode, useContext } from 'react';
+import styled, { css, ThemeContext } from 'styled-components';
 import {
   FaVideo,
   FaStreetView,
@@ -76,20 +76,20 @@ const ToggleButton = styled.button<ToggleButtonProps>`
   justify-content: center;
 
   border: 0;
-  border-radius: 3vh;
+  border-radius: ${props => props.theme.borderRadius || '4px'};
 
   box-shadow: 0px 0px 5px rgb(0, 0, 0, 0.2);
 
   transition: all 0.2s;
 
-  color: rgba(255, 255, 255, 0.9);
-  background: rgba(23, 23, 23, 0.7);
+  color: rgba(${props => props.theme.fontColor || '255, 255, 255'}, 0.9);
+  background: rgba(${props => props.theme.secondaryBackground || '0, 0, 0'}, 0.7);
 
   &:hover {
-    color: rgba(255, 255, 255, 1);
-    background: rgba(220, 20, 60, 0.9);
-    transition: background 0.2s;
-    transform: scale(1.05);
+    color: rgba(${props => props.theme.fontColor || '255, 255, 255'}, 1);
+    background: rgba(${props => props.theme.primaryBackground || '0, 0, 0'}, 0.9);
+    ${props => props.theme.smoothBackgroundTransition ? 'transition: background 0.2s;' : ''}
+    ${props => props.theme.scaleOnHover ? 'transform: scale(1.05);' : ''}
   }
 
   &:active {
@@ -99,13 +99,13 @@ const ToggleButton = styled.button<ToggleButtonProps>`
   ${({ active }) =>
     active &&
     css`
-      color: rgba(255, 255, 255, 0.7);
-      background: rgba(220, 20, 60);
+      color: rgba(${props => props.theme.fontColorSelected || '0, 0, 0'}, 0.7);
+      background: rgba(${props => props.theme.primaryBackgroundSelected || '255, 255, 255'}, 1);
 
       &:hover {
-        color: rgba(255, 255, 255, 0.9);
-        background: rgba(220, 20, 60, 1);
-        transition: background 0.2s;
+        color: rgba(${props => props.theme.fontColorSelected || '0, 0, 0'}, 0.9);
+        background: rgba(${props => props.theme.primaryBackgroundSelected || '255, 255, 255'}, 1);
+        ${props => props.theme.smoothBackgroundTransition ? 'transition: background 0.2s;' : ''}
       }
     `}
 `;
@@ -123,26 +123,26 @@ const Option = styled.button`
   flex-shrink: 0;
 
   border: 0;
-  border-radius: 3vh;
+  border-radius: ${props => props.theme.borderRadius || '4px'};
 
   box-shadow: 0px 0px 5px rgb(0, 0, 0, 0.2);
 
   transition: all 0.1s;
 
-  color: rgba(255, 255, 255, 0.9);
-  background: rgba(23, 23, 23, 0.7);
+  color: rgba(${props => props.theme.fontColor || '255, 255, 255'}, 0.9);
+  background: rgba(${props => props.theme.secondaryBackground || '0, 0, 0'}, 0.7);
 
   &:hover {
-    color: rgba(255, 255, 255, 1);
-    background: rgba(220, 20, 60, 0.9);
-    transition: background 0.2s;
-    transform: scale(1.05);
+    color: rgba(${props => props.theme.fontColorHover || '255, 255, 255'}, 1);
+    background: rgba(${props => props.theme.primaryBackground || '0, 0, 0'}, 0.9);
+    ${props => props.theme.smoothBackgroundTransition ? 'transition: background 0.2s;' : ''}
+    ${props => props.theme.scaleOnHover ? 'transform: scale(1.05);' : ''}
   }
 
   &:active {
     transform: scale(0.8);
-    color: rgba(23, 23, 23, 0.7);
-    background: rgba(220, 20, 60);
+    color: rgba(${props => props.theme.secondaryBackground || '0, 0, 0'}, 0.7);
+    background: rgba(${props => props.theme.primaryBackgroundSelected || '255, 255, 255'}, 1);
   }
 `;
 
@@ -171,10 +171,10 @@ const ExtendedIcon = styled.div`
   flex-shrink: 0;
 
   border: 0;
-  border-radius: 3vh;
+  border-radius: ${props => props.theme.borderRadius || '4px'};
 
-  color: rgba(255, 255, 255, 0.9);
-  background: rgba(23, 23, 23, 0.7);
+  color: rgba(${props => props.theme.fontColor || '255, 255, 255'}, 0.9);
+  background: rgba(${props => props.theme.secondaryBackground || '0, 0, 0'}, 0.7);
 `;
 
 const ExtendedChildren = styled.div`
@@ -193,7 +193,7 @@ const ExtendedChildren = styled.div`
 
 const ToggleOption: React.FC<ToggleOptionProps> = ({ children, active, onClick }) => {
   return (
-    <ToggleButton type="button" active={active} onClick={onClick}>
+    <ToggleButton theme={useContext(ThemeContext)} type="button" active={active} onClick={onClick}>
       {children}
     </ToggleButton>
   );

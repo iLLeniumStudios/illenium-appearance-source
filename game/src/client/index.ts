@@ -46,6 +46,10 @@ export const clothingBlacklistSettings: ClothingBlacklistSettings = JSON.parse(
   LoadResourceFile(GetCurrentResourceName(), 'blacklist.json'),
 );
 
+export const themeConfiguration: any = JSON.parse(
+  LoadResourceFile(GetCurrentResourceName(), 'theme.json'),
+);
+
 const pedModelsByHash = pedModels.reduce((object, model) => {
   return { ...object, [GetHashKey(model)]: model };
 }, {});

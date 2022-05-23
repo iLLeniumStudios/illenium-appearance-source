@@ -1,5 +1,5 @@
-import { useRef } from 'react';
-import styled from 'styled-components';
+import { useContext, useRef } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 import Select from 'react-select';
 
 interface SelectInputProps {
@@ -109,6 +109,11 @@ const SelectInput = ({ title, items, defaultValue, clientValue, onChange }: Sele
       onChange(event.value);
     }
   };
+
+  const themeContext = useContext(ThemeContext);
+  customStyles.control.background = `rgba(${themeContext.secondaryBackground || '0, 0, 0'}, 0.8)`;
+  customStyles.menu.background = `rgba(${themeContext.secondaryBackground || '0, 0, 0'}, 0.8)`;
+  customStyles.menuList.background = `rgba(${themeContext.secondaryBackground || '0, 0, 0'}, 0.8)`;
 
   return (
     <Container>
