@@ -1,10 +1,13 @@
 export interface PedHeadBlend {
   shapeFirst: number;
   shapeSecond: number;
+  shapeThird: number;
   skinFirst: number;
   skinSecond: number;
+  skinThird: number;
   shapeMix: number;
   skinMix: number;
+  thirdMix: number;
 }
 
 export interface PedFaceFeatures {
@@ -129,11 +132,19 @@ export interface HeadBlendSettings {
     min: number;
     max: number;
   };
+  shapeThird: {
+    min: number;
+    max: number;
+  };
   skinFirst: {
     min: number;
     max: number;
   };
   skinSecond: {
+    min: number;
+    max: number;
+  };
+  skinThird: {
     min: number;
     max: number;
   };
@@ -143,6 +154,11 @@ export interface HeadBlendSettings {
     factor: number;
   };
   skinMix: {
+    min: number;
+    max: number;
+    factor: number;
+  };
+  thirdMix: {
     min: number;
     max: number;
     factor: number;

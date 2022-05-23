@@ -77,6 +77,33 @@ const HeadBlend = ({ settings, storedData, data, handleHeadBlendChange }: HeadBl
           onChange={value => handleHeadBlendChange('skinMix', value)}
         />
       </Item>
+      <Item title={locales.headBlend.race.title}>
+        <Input
+            title={locales.headBlend.race.shape}
+            min={settings.shapeThird.min}
+            max={settings.shapeThird.max}
+            defaultValue={data.shapeThird}
+            clientValue={storedData.shapeThird}
+            onChange={value => handleHeadBlendChange('shapeThird', value)}
+        />
+        <Input
+          title={locales.headBlend.race.skin}
+          min={settings.skinThird.min}
+          max={settings.skinThird.max}
+          defaultValue={data.skinThird}
+          clientValue={storedData.skinThird}
+          onChange={value => handleHeadBlendChange('skinThird', value)}
+        />
+        <RangeInput
+          title={locales.headBlend.race.mix}
+          min={settings.thirdMix.min}
+          max={settings.thirdMix.max}
+          factor={settings.thirdMix.factor}
+          defaultValue={data.thirdMix}
+          clientValue={storedData.thirdMix}
+          onChange={value => handleHeadBlendChange('thirdMix', value)}
+        />
+      </Item>
     </Section>
   );
 };

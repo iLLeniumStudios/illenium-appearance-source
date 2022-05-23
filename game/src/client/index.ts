@@ -97,21 +97,32 @@ function getPedHeadBlend(ped: number): PedHeadBlend {
     10: skinThird,
     18: isParent,
   */
-  const { 0: shapeFirst, 2: shapeSecond, 6: skinFirst, 8: skinSecond } = new Uint32Array(buffer);
+  const {
+    0: shapeFirst,
+    2: shapeSecond,
+    4: shapeThird,
+    6: skinFirst,
+    8: skinSecond,
+    10: skinThird,
+  } = new Uint32Array(buffer);
 
   // 0: shapeMix, 2: skinMix, 4: thirdMix
-  const { 0: shapeMix, 2: skinMix } = new Float32Array(buffer, 48);
+  const { 0: shapeMix, 2: skinMix, 4: thirdMix } = new Float32Array(buffer, 48);
 
   const normalizedShapeMix = parseFloat(shapeMix.toFixed(1));
   const normalizedSkinMix = parseFloat(skinMix.toFixed(1));
+  const normalizedThirdMix = parseFloat(thirdMix.toFixed(1));
 
   return {
     shapeFirst,
     shapeSecond,
+    shapeThird,
     skinFirst,
     skinSecond,
+    skinThird,
     shapeMix: normalizedShapeMix,
     skinMix: normalizedSkinMix,
+    thirdMix: normalizedThirdMix,
   };
 }
 
@@ -236,20 +247,30 @@ export async function setPlayerModel(model: string): Promise<void> {
 export function setPedHeadBlend(ped: number, headBlend: PedHeadBlend): void {
   if (!headBlend) return;
 
-  const { shapeFirst, shapeSecond, shapeMix, skinFirst, skinSecond, skinMix } = headBlend;
+  const {
+    shapeFirst,
+    shapeSecond,
+    shapeThird,
+    shapeMix,
+    skinFirst,
+    skinSecond,
+    skinThird,
+    skinMix,
+    thirdMix,
+  } = headBlend;
 
   if (isPedFreemodeModel(ped)) {
     SetPedHeadBlendData(
       ped,
       shapeFirst,
       shapeSecond,
-      0,
+      shapeThird,
       skinFirst,
       skinSecond,
-      0,
+      skinThird,
       shapeMix,
       skinMix,
-      0,
+      thirdMix,
       false,
     );
   }

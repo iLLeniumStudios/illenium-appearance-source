@@ -301,11 +301,19 @@ export function getAppearanceSettings(): AppearanceSettings {
       min: 0,
       max: 45,
     },
+    shapeThird: {
+      min: 0,
+      max: 45,
+    },
     skinFirst: {
       min: 0,
       max: 45,
     },
     skinSecond: {
+      min: 0,
+      max: 45,
+    },
+    skinThird: {
       min: 0,
       max: 45,
     },
@@ -315,6 +323,11 @@ export function getAppearanceSettings(): AppearanceSettings {
       factor: 0.1,
     },
     skinMix: {
+      min: 0,
+      max: 1,
+      factor: 0.1,
+    },
+    thirdMix: {
       min: 0,
       max: 1,
       factor: 0.1,
