@@ -33,7 +33,6 @@ const App: React.FC = () => {
 
   const getThemeConfiguration = async () => {
     const themeData = await Nui.post('get_theme_configuration');
-    console.log(JSON.stringify(themeData));
     setThemeConfiguration(themeData);
     setCurrentTheme(getCurrentTheme(themeData));
   };
