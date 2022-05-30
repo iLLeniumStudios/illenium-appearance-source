@@ -8,6 +8,32 @@ declare function GetParentResourceName(): string;
 
 const events: Events = {};
 
+async function fetchWithTimeout(resource: string, options: any = {}) : Promise<Response> {
+  const { timeout = 5000 } = options;
+
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+
+  const response = await fetch(resource, {
+    ...options,
+    signal: controller.signal
+  });
+  clearTimeout(id);
+
+  return response;
+}
+
+async function fetchWithRetries(resource: string, options: any = {}, retries: number = 1) : Promise<any> {
+  try {
+    return await fetchWithTimeout(resource, options);
+  } catch (error: any) {
+    if(error.name === 'AbortError' && retries > 0) {
+      console.log(`Request Failed due to timeout: ${resource}`);
+      return fetchWithRetries(resource, options, retries - 1);
+    }
+  }
+}
+
 async function post(event: string, data = {}): Promise<any> {
   if (!import.meta.env.PROD) {
     if (!mocks[event]) return;
@@ -17,15 +43,15 @@ async function post(event: string, data = {}): Promise<any> {
 
   const url = `https://${GetParentResourceName()}/${event}`;
 
-  const response = await fetch(url, {
+  const response = await fetchWithRetries(url, {
     method: 'post',
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
     },
     body: JSON.stringify(data),
-  });
+  }, 5);
 
-  return response.json();
+  return response?.json();
 }
 
 function onEvent(type: string, func: any): void {
