@@ -4,7 +4,7 @@ import GlobalStyles from './styles/global';
 import Appearance from './components/Appearance';
 import { ThemeProvider } from 'styled-components';
 import Nui from './Nui';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const defaultTheme: any = {
   id: 'default',
@@ -22,20 +22,7 @@ const defaultTheme: any = {
 };
 
 const App: React.FC = () => {
-  const [themeConfiguration, setThemeConfiguration] = useState<any>();
-  const [currentTheme, setCurrentTheme] = useState<any>();
-
-  useEffect(() => {
-    if (!themeConfiguration) {
-      getThemeConfiguration();
-    }
-  }, []);
-
-  const getThemeConfiguration = async () => {
-    const themeData = await Nui.post('get_theme_configuration');
-    setThemeConfiguration(themeData);
-    setCurrentTheme(getCurrentTheme(themeData));
-  };
+  const [currentTheme, setCurrentTheme] = useState(defaultTheme);
 
   const getCurrentTheme = (themeData: any) => {
     for (let index = 0; index < themeData.themes.length; index++) {
@@ -45,11 +32,20 @@ const App: React.FC = () => {
     }
   };
 
+  const loadTheme = useCallback(async () => {
+    const themeData = await Nui.post('get_theme_configuration');
+    setCurrentTheme(getCurrentTheme(themeData));
+  }, []);
+
+  useEffect(() => {
+    loadTheme().catch(console.error);
+  }, [loadTheme]);
+
   return (
     <NuiStateProvider>
-      <ThemeProvider theme={currentTheme ?? defaultTheme}>
+      <ThemeProvider theme={currentTheme}>
         <Appearance />
-        <GlobalStyles theme={currentTheme ?? defaultTheme} />
+        <GlobalStyles />
       </ThemeProvider>
     </NuiStateProvider>
   );

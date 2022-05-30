@@ -1,5 +1,5 @@
-import { ReactNode, useContext } from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import { ReactNode } from 'react';
+import styled from 'styled-components';
 
 interface ButtonProps {
   children: string | ReactNode;
@@ -25,7 +25,7 @@ const CustomButton = styled.span<ButtonProps>`
 `;
 
 const Button = ({ children, onClick, margin, width }: ButtonProps) => {
-  return <CustomButton theme={useContext(ThemeContext)} onClick={onClick} margin={margin} width={width}>{children}</CustomButton>;
+  return <CustomButton onClick={onClick} margin={margin} width={width}>{children}</CustomButton>;
 };
 
 export default Button;

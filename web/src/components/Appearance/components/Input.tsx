@@ -1,5 +1,5 @@
-import { useCallback, useContext, useRef } from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import { useCallback, useRef } from 'react';
+import styled from 'styled-components';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { valueContainerCSS } from 'react-select/src/components/containers';
 
@@ -162,7 +162,7 @@ const Input: React.FC<InputProps> = ({ title, min = 0, max = 255, blacklisted = 
   );
 
   return (
-    <Container onClick={handleContainerClick} theme={useContext(ThemeContext)}>
+    <Container onClick={handleContainerClick}>
       <span>
         <small>{title}</small>
         <small>{clientValue} / {max}</small>

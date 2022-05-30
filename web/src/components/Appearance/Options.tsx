@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect, ReactElement, useCallback, ReactNode, useContext } from 'react';
-import styled, { css, ThemeContext } from 'styled-components';
+import { useState, useRef, useEffect, ReactElement, useCallback, ReactNode } from 'react';
+import styled, { css } from 'styled-components';
 import {
   FaVideo,
   FaStreetView,
@@ -193,7 +193,7 @@ const ExtendedChildren = styled.div`
 
 const ToggleOption: React.FC<ToggleOptionProps> = ({ children, active, onClick }) => {
   return (
-    <ToggleButton theme={useContext(ThemeContext)} type="button" active={active} onClick={onClick}>
+    <ToggleButton type="button" active={active} onClick={onClick}>
       {children}
     </ToggleButton>
   );

@@ -1,5 +1,5 @@
-import { useCallback, useContext, useRef } from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import { useCallback, useRef } from 'react';
+import styled from 'styled-components';
 
 interface RangeInputProps {
   title?: string;
@@ -86,7 +86,7 @@ const RangeInput: React.FC<RangeInputProps> = ({
   );
 
   return (
-    <Container onClick={handleContainerClick} theme={useContext(ThemeContext)}>
+    <Container onClick={handleContainerClick}>
       <span>
         <small>
           {title}: {defaultValue}

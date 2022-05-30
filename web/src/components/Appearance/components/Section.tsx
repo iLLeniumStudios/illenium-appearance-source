@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef, ReactNode, useContext } from 'react';
-import styled, { css, ThemeContext } from 'styled-components';
+import { useState, useEffect, useRef, ReactNode } from 'react';
+import styled, { css } from 'styled-components';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import { useSpring, animated } from 'react-spring';
 
@@ -100,8 +100,8 @@ const Section: React.FC<SectionProps> = ({ children, title, deps = [] }) => {
   }, [ref, setHeight, deps]);
 
   return (
-    <Container theme={useContext(ThemeContext)}>
-      <Header active={active} onClick={() => setActive(state => !state)} theme={useContext(ThemeContext)}>
+    <Container>
+      <Header active={active} onClick={() => setActive(state => !state)}>
         <span>{title}</span>
         {active ? <FiChevronUp size={30} /> : <FiChevronDown size={30} />}
       </Header>

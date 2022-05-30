@@ -1,5 +1,5 @@
-import { useCallback, useContext } from 'react';
-import styled, { css, ThemeContext } from 'styled-components';
+import { useCallback } from 'react';
+import styled, { css } from 'styled-components';
 
 interface ColorInputProps {
   title?: string;
@@ -66,7 +66,7 @@ const ColorInput: React.FC<ColorInputProps> = ({ title, colors = [], defaultValu
   );
 
   return (
-    <Container theme={useContext(ThemeContext)}>
+    <Container>
       <span>
         <small>{`${title}: ${defaultValue}`}</small>
         <small>{clientValue}</small>
@@ -74,7 +74,6 @@ const ColorInput: React.FC<ColorInputProps> = ({ title, colors = [], defaultValu
       <div>
         {colors.map((color, index) => (
           <Button
-            theme={useContext(ThemeContext)}
             key={index}
             style={{ backgroundColor: `rgb(${color[0]}, ${color[1]}, ${color[2]})` }}
             selected={defaultValue === index}

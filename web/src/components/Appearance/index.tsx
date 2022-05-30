@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo, useContext } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useTransition as useTransitionAnimation, animated } from 'react-spring';
 import { useNuiState } from '../../hooks/nuiState';
 import Nui from '../../Nui';
@@ -534,7 +534,7 @@ const Appearance = () => {
           item && (
             <animated.div key={key} style={style}>
               <Wrapper>
-                <Container theme={useContext(ThemeContext)}>
+                <Container>
                   {config.ped && (
                     <Ped
                       settings={appearanceSettings.ped}
