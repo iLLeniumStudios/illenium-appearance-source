@@ -9,7 +9,7 @@ declare function GetParentResourceName(): string;
 const events: Events = {};
 
 async function fetchWithTimeout(resource: string, options: any = {}) : Promise<Response> {
-  const { timeout = 5000 } = options;
+  const { timeout = 15000 } = options;
 
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
@@ -23,7 +23,7 @@ async function fetchWithTimeout(resource: string, options: any = {}) : Promise<R
   return response;
 }
 
-async function fetchWithRetries(resource: string, options: any = {}, retries: number = 1) : Promise<any> {
+async function fetchWithRetries(resource: string, options: any = {}, retries: number = 1) : Promise<Response> {
   try {
     return await fetchWithTimeout(resource, options);
   } catch (error: any) {
@@ -32,6 +32,14 @@ async function fetchWithRetries(resource: string, options: any = {}, retries: nu
       return fetchWithRetries(resource, options, retries - 1);
     }
   }
+
+  return new Response(null, {
+    status: 408,
+    statusText: "Request Timeout",
+    headers: {
+      "Content-Length": "0"
+    },
+  });
 }
 
 async function post(event: string, data = {}): Promise<any> {
@@ -51,7 +59,7 @@ async function post(event: string, data = {}): Promise<any> {
     body: JSON.stringify(data),
   }, 5);
 
-  return response?.json();
+  return response.json();
 }
 
 function onEvent(type: string, func: any): void {

@@ -490,7 +490,7 @@ const Appearance = () => {
   );
 
   useEffect(() => {
-    Nui.post('appearance_get_locales').then(result => setLocales(JSON.parse(result)));
+    Nui.post('appearance_get_locales').then(result => setLocales(result));
 
     Nui.onEvent('appearance_display', () => {
       setDisplay({ appearance: true });
@@ -508,18 +508,12 @@ const Appearance = () => {
 
   useEffect(() => {
     if (display.appearance) {
-      (async () => {
-        const {
-          config: _config,
-          appearanceSettings: settings,
-          appearanceData,
-        } = await Nui.post('appearance_get_settings_and_data');
-
-        setConfig(_config);
-        setAppearanceSettings(settings);
-        setStoredData(appearanceData);
-        setData(appearanceData);
-      })();
+      Nui.post('appearance_get_settings_and_data').then(result => {
+        setConfig(result.config);
+        setAppearanceSettings(result.appearanceSettings);
+        setStoredData(result.appearanceData);
+        setData(result.appearanceData);
+      });
     }
   }, [display.appearance]);
 

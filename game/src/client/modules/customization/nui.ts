@@ -28,6 +28,7 @@ import {
   setPedComponent,
   setPedProp,
   themeConfiguration,
+  locales,
 } from '../../index';
 
 export function registerNuiCallbacks(): void {
@@ -59,11 +60,6 @@ export function registerNuiCallbacks(): void {
   RegisterNuiCallbackType('get_theme_configuration');
 
   on('__cfx_nui:appearance_get_locales', (_: any, cb: (arg: any) => void): void => {
-    const locales = LoadResourceFile(
-      GetCurrentResourceName(),
-      `locales/${GetConvar('fivem-appearance:locale', 'en')}.json`,
-    );
-
     cb(locales);
   });
 
