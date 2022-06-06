@@ -8,7 +8,7 @@ declare function GetParentResourceName(): string;
 
 const events: Events = {};
 
-async function fetchWithTimeout(resource: string, options: any = {}) : Promise<Response> {
+async function fetchWithTimeout(resource: string, options: any = {}): Promise<Response> {
   const { timeout = 15000 } = options;
 
   const controller = new AbortController();
@@ -16,18 +16,18 @@ async function fetchWithTimeout(resource: string, options: any = {}) : Promise<R
 
   const response = await fetch(resource, {
     ...options,
-    signal: controller.signal
+    signal: controller.signal,
   });
   clearTimeout(id);
 
   return response;
 }
 
-async function fetchWithRetries(resource: string, options: any = {}, retries: number = 1) : Promise<Response> {
+async function fetchWithRetries(resource: string, options: any = {}, retries: number = 1): Promise<Response> {
   try {
     return await fetchWithTimeout(resource, options);
   } catch (error: any) {
-    if(error.name === 'AbortError' && retries > 0) {
+    if (error.name === 'AbortError' && retries > 0) {
       console.log(`Request Failed due to timeout: ${resource}`);
       return fetchWithRetries(resource, options, retries - 1);
     }
@@ -35,9 +35,9 @@ async function fetchWithRetries(resource: string, options: any = {}, retries: nu
 
   return new Response(null, {
     status: 408,
-    statusText: "Request Timeout",
+    statusText: 'Request Timeout',
     headers: {
-      "Content-Length": "0"
+      'Content-Length': '0',
     },
   });
 }
@@ -51,13 +51,17 @@ async function post(event: string, data = {}): Promise<any> {
 
   const url = `https://${GetParentResourceName()}/${event}`;
 
-  const response = await fetchWithRetries(url, {
-    method: 'post',
-    headers: {
-      'Content-type': 'application/json; charset=UTF-8',
+  const response = await fetchWithRetries(
+    url,
+    {
+      method: 'post',
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify(data),
     },
-    body: JSON.stringify(data),
-  }, 5);
+    5,
+  );
 
   return response.json();
 }

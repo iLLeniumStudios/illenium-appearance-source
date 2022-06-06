@@ -50,10 +50,12 @@ export const themeConfiguration: any = JSON.parse(
   LoadResourceFile(GetCurrentResourceName(), 'theme.json'),
 );
 
-export const locales = JSON.parse(LoadResourceFile(
-  GetCurrentResourceName(),
-  `locales/${GetConvar('fivem-appearance:locale', 'en')}.json`,
-));
+export const locales = JSON.parse(
+  LoadResourceFile(
+    GetCurrentResourceName(),
+    `locales/${GetConvar('fivem-appearance:locale', 'en')}.json`,
+  ),
+);
 
 const pedModelsByHash = pedModels.reduce((object, model) => {
   return { ...object, [GetHashKey(model)]: model };
@@ -121,7 +123,7 @@ function getPedHeadBlend(ped: number): PedHeadBlend {
   const normalizedShapeMix = parseFloat(shapeMix.toFixed(1));
   const normalizedSkinMix = parseFloat(skinMix.toFixed(1));
   let normalizedThirdMix = parseFloat(thirdMix.toFixed(1));
-  if(Number.isNaN(normalizedThirdMix)) {
+  if (Number.isNaN(normalizedThirdMix)) {
     normalizedThirdMix = 0;
   }
 
