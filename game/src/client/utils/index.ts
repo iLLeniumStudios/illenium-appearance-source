@@ -28,12 +28,19 @@ export const getPedStats = (): Array<number> => {
   const playerPed = PlayerPedId();
   const health = GetEntityHealth(playerPed);
   const armor = GetPedArmour(playerPed);
+  const maxHealth = GetEntityMaxHealth(playerPed);
 
-  return [health, armor];
+  return [maxHealth, health, armor];
 };
 
-export const setPedStats = (health: number, armor: number): void => {
+export const setPedStats = async (
+  maxHealth: number,
+  health: number,
+  armor: number,
+): Promise<void> => {
   const playerPed = PlayerPedId();
+  SetPedMaxHealth(playerPed, maxHealth);
+  await Delay(1000);
   SetEntityHealth(playerPed, health);
   SetPedArmour(playerPed, armor);
 };
