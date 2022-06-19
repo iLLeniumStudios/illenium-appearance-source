@@ -1,4 +1,4 @@
-import { Delay, isPedFreemodeModel, getPedStats, setPedStats } from './utils';
+import { Delay, isPedFreemodeModel } from './utils';
 
 import {
   FACE_FEATURES,
@@ -243,7 +243,7 @@ export async function setPlayerModel(model: string): Promise<void> {
     await Delay(0);
   }
 
-  const [maxHealth, currentHealth, currentArmour] = getPedStats();
+  //const [maxHealth, currentHealth, currentArmour] = getPedStats();
 
   SetPlayerModel(PlayerId(), model);
   SetModelAsNoLongerNeeded(model);
@@ -255,7 +255,7 @@ export async function setPlayerModel(model: string): Promise<void> {
     SetPedHeadBlendData(playerPed, 0, 0, 0, 0, 0, 0, 0, 0, 0, false);
   }
 
-  await setPedStats(maxHealth, currentHealth, currentArmour);
+  //await setPedStats(maxHealth, currentHealth, currentArmour);
 }
 
 export function setPedHeadBlend(ped: number, headBlend: PedHeadBlend): void {
