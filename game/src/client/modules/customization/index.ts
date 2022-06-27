@@ -15,6 +15,7 @@ import {
   clothingBlacklistSettings,
   getPlayerJob,
   getPlayerGang,
+  getPlayerAces,
 } from '../../index';
 
 import { arrayToVector3, isPedMale, Delay, isPedFreemodeModel } from '../../utils';
@@ -109,6 +110,21 @@ function addToBlacklist(
   }
 }
 
+function distinctAces(items: BlacklistItem[]) {
+  var unique = [];
+  var distinct = [];
+  for(let i = 0; i < items.length; i++) {
+    for(let j = 0; j < items[i].aces?.length; j++) {
+      if(!unique[items[i].aces[j]]) {
+        distinct.push(items[i].aces[j]);
+        unique[items[i].aces[j]] = 1;
+      }
+    }
+  }
+
+  return distinct;
+}
+
 function filterBlacklistSettings(items: BlacklistItem[], drawableId: number) {
   var blacklistSettings: BlacklistSettings = {
     drawables: [],
@@ -117,6 +133,9 @@ function filterBlacklistSettings(items: BlacklistItem[], drawableId: number) {
 
   const job = getPlayerJob();
   const gang = getPlayerGang();
+
+
+  const aces = getPlayerAces(distinctAces(items));
 
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
@@ -200,10 +219,7 @@ export function getComponentSettings(ped: number, componentId: number): Componen
   };
 
   if (isPedFreemodeModel(ped)) {
-    blacklistSettings = filterBlacklistSettings(
-      componentBlacklistMap(isMale, componentId),
-      drawableId,
-    );
+    blacklistSettings = filterBlacklistSettings(componentBlacklistMap(isMale, componentId), drawableId);
   }
 
   const settings = {
