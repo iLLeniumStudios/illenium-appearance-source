@@ -48,6 +48,7 @@ interface OptionsProps {
   handleRotateRight: () => void;
   handleSave: () => void;
   handleExit: () => void;
+  disableCancel: boolean;
 }
 
 const Container = styled.div`
@@ -239,6 +240,7 @@ const Options: React.FC<OptionsProps> = ({
   handleRotateRight,
   handleExit,
   handleSave,
+  disableCancel
 }) => {
   return (
     <Container>
@@ -276,9 +278,11 @@ const Options: React.FC<OptionsProps> = ({
       <Option onClick={handleSave}>
         <FaSave size={20} />
       </Option>
+      {!disableCancel &&
       <Option onClick={handleExit}>
         <FaTimes size={20} />
-      </Option>
+      </Option>}
+      
     </Container>
   );
 };

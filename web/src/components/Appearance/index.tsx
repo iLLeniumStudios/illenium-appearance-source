@@ -624,6 +624,7 @@ const Appearance = () => {
                   handleRotateRight={handleRotateRight}
                   handleSave={handleSaveModal}
                   handleExit={handleExitModal}
+                  disableCancel={config.disableCancel}
                 />
               </Wrapper>
             </animated.div>
@@ -640,6 +641,7 @@ const Appearance = () => {
                 decline={locales.modal.decline}
                 handleAccept={() => handleSave(true)}
                 handleDecline={() => handleSave(false)}
+                disableCancel={config.disableCancel}
               />
             </animated.div>
           ),
@@ -655,6 +657,7 @@ const Appearance = () => {
                 decline={locales.modal.decline}
                 handleAccept={() => handleExit(true)}
                 handleDecline={() => handleExit(false)}
+                disableCancel={config.disableCancel}
               />
             </animated.div>
           ),

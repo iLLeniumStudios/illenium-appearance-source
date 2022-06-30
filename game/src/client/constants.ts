@@ -171,6 +171,7 @@ export const DEFAULT_CUSTOMIZATION_CONFIG: CustomizationConfig = {
   components: true,
   props: true,
   tattoos: true,
+  disableCancel: false,
 };
 
 export const DATA_CLOTHES: DataClothes = {

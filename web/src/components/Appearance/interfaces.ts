@@ -232,6 +232,7 @@ export interface CustomizationConfig {
   components: boolean;
   props: boolean;
   tattoos: boolean;
+  disableCancel: boolean;
 }
 
 export interface CameraState {
