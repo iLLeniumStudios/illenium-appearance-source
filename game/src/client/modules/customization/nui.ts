@@ -71,7 +71,7 @@ export function registerNuiCallbacks(): void {
       const appearanceData = getAppearance();
       const appearanceSettings = getAppearanceSettings();
       emitNet('fivem-appearance:server:GetPlayerAces');
-      await Delay(100);
+      await Delay(250);
       cb({ config, appearanceData, appearanceSettings });
     },
   );
