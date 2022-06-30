@@ -15,6 +15,7 @@ import {
   clothingBlacklistSettings,
   getPlayerJob,
   getPlayerGang,
+  getPlayerAces,
 } from '../../index';
 
 import { arrayToVector3, isPedMale, Delay, isPedFreemodeModel } from '../../utils';
@@ -109,7 +110,7 @@ function addToBlacklist(
   }
 }
 
-function filterBlacklistSettings(items: BlacklistItem[], drawableId: number) {
+function filterBlacklistSettings(items: BlacklistItem[], drawableId: number): BlacklistSettings {
   var blacklistSettings: BlacklistSettings = {
     drawables: [],
     textures: [],
@@ -117,10 +118,15 @@ function filterBlacklistSettings(items: BlacklistItem[], drawableId: number) {
 
   const job = getPlayerJob();
   const gang = getPlayerGang();
+  const allowedAces = getPlayerAces();
 
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
-    if ((item.jobs && item.jobs.includes(job)) || (item.gangs && item.gangs.includes(gang))) {
+    if (
+      (item.jobs && item.jobs.includes(job)) ||
+      (item.gangs && item.gangs.includes(gang)) ||
+      (item.aces && item.aces.some(r => allowedAces.includes(r)))
+    ) {
       continue;
     }
     if (item.drawables) {

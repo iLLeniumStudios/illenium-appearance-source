@@ -267,6 +267,7 @@ interface BlacklistItem {
   textures?: number[];
   jobs?: string[];
   gangs?: string[];
+  aces?: string[];
 }
 
 interface ClothingBlacklist {
