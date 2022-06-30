@@ -110,22 +110,7 @@ function addToBlacklist(
   }
 }
 
-function distinctAces(items: BlacklistItem[]) {
-  var unique = [];
-  var distinct = [];
-  for(let i = 0; i < items.length; i++) {
-    for(let j = 0; j < items[i].aces?.length; j++) {
-      if(!unique[items[i].aces[j]]) {
-        distinct.push(items[i].aces[j]);
-        unique[items[i].aces[j]] = 1;
-      }
-    }
-  }
-
-  return distinct;
-}
-
-function filterBlacklistSettings(items: BlacklistItem[], drawableId: number) {
+function filterBlacklistSettings(items: BlacklistItem[], drawableId: number): BlacklistSettings {
   var blacklistSettings: BlacklistSettings = {
     drawables: [],
     textures: [],
@@ -133,13 +118,15 @@ function filterBlacklistSettings(items: BlacklistItem[], drawableId: number) {
 
   const job = getPlayerJob();
   const gang = getPlayerGang();
-
-
-  const aces = getPlayerAces(distinctAces(items));
+  const allowedAces = getPlayerAces();
 
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
-    if ((item.jobs && item.jobs.includes(job)) || (item.gangs && item.gangs.includes(gang))) {
+    if (
+      (item.jobs && item.jobs.includes(job)) ||
+      (item.gangs && item.gangs.includes(gang)) ||
+      (item.aces && item.aces.some(r => allowedAces.includes(r)))
+    ) {
       continue;
     }
     if (item.drawables) {
@@ -219,7 +206,10 @@ export function getComponentSettings(ped: number, componentId: number): Componen
   };
 
   if (isPedFreemodeModel(ped)) {
-    blacklistSettings = filterBlacklistSettings(componentBlacklistMap(isMale, componentId), drawableId);
+    blacklistSettings = filterBlacklistSettings(
+      componentBlacklistMap(isMale, componentId),
+      drawableId,
+    );
   }
 
   const settings = {

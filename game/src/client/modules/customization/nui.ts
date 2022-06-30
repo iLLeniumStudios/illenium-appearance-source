@@ -30,6 +30,7 @@ import {
   themeConfiguration,
   locales,
 } from '../../index';
+import { Delay } from '../../utils';
 
 export function registerNuiCallbacks(): void {
   RegisterNuiCallbackType('appearance_get_locales');
@@ -63,12 +64,17 @@ export function registerNuiCallbacks(): void {
     cb(locales);
   });
 
-  on('__cfx_nui:appearance_get_settings_and_data', (_: any, cb: (arg: any) => void): void => {
-    const config = getConfig();
-    const appearanceData = getAppearance();
-    const appearanceSettings = getAppearanceSettings();
-    cb({ config, appearanceData, appearanceSettings });
-  });
+  on(
+    '__cfx_nui:appearance_get_settings_and_data',
+    async (_: any, cb: (arg: any) => void): Promise<void> => {
+      const config = getConfig();
+      const appearanceData = getAppearance();
+      const appearanceSettings = getAppearanceSettings();
+      emitNet('fivem-appearance:server:GetPlayerAces');
+      await Delay(100);
+      cb({ config, appearanceData, appearanceSettings });
+    },
+  );
 
   on('__cfx_nui:appearance_set_camera', (camera: string, cb: (arg: any) => void): void => {
     cb({});

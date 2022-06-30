@@ -17,6 +17,7 @@ const GET_PED_HEAD_BLEND_DATA = '0x2746bd9d88c5c5d0';
 
 let playerJob = '';
 let playerGang = '';
+let playerAces = [];
 
 on('updateJob', (job: string) => {
   playerJob = job;
@@ -26,12 +27,20 @@ on('updateGang', (gang: string) => {
   playerGang = gang;
 });
 
+onNet('fivem-appearance:client:SetPlayerAces', (aces: string[]) => {
+  playerAces = aces;
+});
+
 export function getPlayerJob(): string {
   return playerJob;
 }
 
 export function getPlayerGang(): string {
   return playerGang;
+}
+
+export function getPlayerAces(): string[] {
+  return playerAces;
 }
 
 export const totalTattoos: TattooList = JSON.parse(
