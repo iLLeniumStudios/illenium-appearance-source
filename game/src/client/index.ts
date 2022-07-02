@@ -72,7 +72,9 @@ const pedModelsByHash = {};
 
 function computePedModelsByHash() {
   for (let i = 0; i < pedConfig.pedConfig.length; i++) {
-    for (let ped in pedConfig.pedConfig[i].peds) {
+    const peds = pedConfig.pedConfig[i].peds;
+    for (let j = 0; j < peds.length; j++) {
+      const ped = peds[j];
       pedModelsByHash[GetHashKey(ped)] = ped;
     }
   }
