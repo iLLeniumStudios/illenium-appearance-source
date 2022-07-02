@@ -110,6 +110,15 @@ const SelectInput = ({ title, items, defaultValue, clientValue, onChange }: Sele
     }
   };
 
+  const onMenuOpen = () => {
+    setTimeout(() => {
+      const selectedEl = document.getElementsByClassName("Select" + title + "__option--is-selected")[0];
+      if (selectedEl) {
+        selectedEl.scrollIntoView({ behavior: 'auto', block: 'start', inline: 'nearest' });
+      }
+    }, 100);
+  };
+
   const themeContext = useContext(ThemeContext);
   customStyles.control.background = `rgba(${themeContext.secondaryBackground || '0, 0, 0'}, 0.8)`;
   customStyles.menu.background = `rgba(${themeContext.secondaryBackground || '0, 0, 0'}, 0.8)`;
@@ -127,6 +136,9 @@ const SelectInput = ({ title, items, defaultValue, clientValue, onChange }: Sele
         options={items.map(item => ({ value: item, label: item }))}
         value={{ value: defaultValue, label: defaultValue }}
         onChange={handleChange}
+        onMenuOpen={onMenuOpen}
+        className={"Select" + title}
+        classNamePrefix={"Select" + title}
         menuPortalTarget={document.body}
       />
     </Container>
