@@ -230,9 +230,32 @@ export interface CustomizationConfig {
   faceFeatures: boolean;
   headOverlays: boolean;
   components: boolean;
+  componentConfig: ComponentConfig;
   props: boolean;
+  propConfig: PropConfig;
   tattoos: boolean;
-  disableCancel: boolean;
+  enableExit: boolean;
+}
+
+export interface ComponentConfig {
+  masks: boolean;
+  upperBody: boolean;
+  lowerBody: boolean;
+  bags: boolean;
+  shoes: boolean;
+  scarfAndChains: boolean;
+  shirts: boolean;
+  bodyArmor: boolean;
+  decals: boolean;
+  jackets: boolean;
+}
+
+export interface PropConfig {
+  hats: boolean;
+  glasses: boolean;
+  ear: boolean;
+  watches: boolean;
+  bracelets: boolean;
 }
 
 export interface CameraState {

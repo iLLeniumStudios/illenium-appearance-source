@@ -5,7 +5,7 @@ import Item from './components/Item';
 import { FlexWrapper } from './styles';
 import Input from './components/Input';
 
-import { ComponentSettings, PedComponent } from './interfaces';
+import { ComponentConfig, ComponentSettings, PedComponent } from './interfaces';
 
 interface ComponentsProps {
   settings: ComponentSettings[];
@@ -13,6 +13,7 @@ interface ComponentsProps {
   storedData: PedComponent[];
   handleComponentDrawableChange: (component_id: number, drawable: number) => void;
   handleComponentTextureChange: (component_id: number, texture: number) => void;
+  componentConfig: ComponentConfig;
 }
 
 interface DataById<T> {
@@ -25,6 +26,7 @@ const Components = ({
   storedData,
   handleComponentDrawableChange,
   handleComponentTextureChange,
+  componentConfig,
 }: ComponentsProps) => {
   const { locales } = useNuiState();
 
@@ -46,7 +48,7 @@ const Components = ({
 
   return (
     <Section title={locales.components.title}>
-      <Item title={locales.components.mask}>
+      {componentConfig.masks && <Item title={locales.components.mask}>
         <FlexWrapper>
           <Input
             title={locales.components.drawable}
@@ -67,8 +69,8 @@ const Components = ({
             onChange={value => handleComponentTextureChange(1, value)}
           />
         </FlexWrapper>
-      </Item>
-      <Item title={locales.components.scarfAndChains}>
+      </Item>}
+      {componentConfig.scarfAndChains && <Item title={locales.components.scarfAndChains}>
         <FlexWrapper>
           <Input
             title={locales.components.drawable}
@@ -89,8 +91,8 @@ const Components = ({
             onChange={value => handleComponentTextureChange(7, value)}
           />
         </FlexWrapper>
-      </Item>
-      <Item title={locales.components.jackets}>
+      </Item>}
+      {componentConfig.jackets && <Item title={locales.components.jackets}>
         <FlexWrapper>
           <Input
             title={locales.components.drawable}
@@ -111,8 +113,8 @@ const Components = ({
             onChange={value => handleComponentTextureChange(11, value)}
           />
         </FlexWrapper>
-      </Item>
-      <Item title={locales.components.shirt}>
+      </Item>}
+      {componentConfig.shirts && <Item title={locales.components.shirt}>
         <FlexWrapper>
           <Input
             title={locales.components.drawable}
@@ -133,8 +135,8 @@ const Components = ({
             onChange={value => handleComponentTextureChange(8, value)}
           />
         </FlexWrapper>
-      </Item>
-      <Item title={locales.components.bodyArmor}>
+      </Item>}
+      {componentConfig.bodyArmor && <Item title={locales.components.bodyArmor}>
         <FlexWrapper>
           <Input
             title={locales.components.drawable}
@@ -155,8 +157,8 @@ const Components = ({
             onChange={value => handleComponentTextureChange(9, value)}
           />
         </FlexWrapper>
-      </Item>
-      <Item title={locales.components.bags}>
+      </Item>}
+      {componentConfig.bags && <Item title={locales.components.bags}>
         <FlexWrapper>
           <Input
             title={locales.components.drawable}
@@ -177,8 +179,8 @@ const Components = ({
             onChange={value => handleComponentTextureChange(5, value)}
           />
         </FlexWrapper>
-      </Item>
-      <Item title={locales.components.upperBody}>
+      </Item>}
+      {componentConfig.upperBody && <Item title={locales.components.upperBody}>
         <FlexWrapper>
           <Input
             title={locales.components.drawable}
@@ -199,8 +201,8 @@ const Components = ({
             onChange={value => handleComponentTextureChange(3, value)}
           />
         </FlexWrapper>
-      </Item>
-      <Item title={locales.components.lowerBody}>
+      </Item>}
+      {componentConfig.lowerBody && <Item title={locales.components.lowerBody}>
         <FlexWrapper>
           <Input
             title={locales.components.drawable}
@@ -221,8 +223,8 @@ const Components = ({
             onChange={value => handleComponentTextureChange(4, value)}
           />
         </FlexWrapper>
-      </Item>
-      <Item title={locales.components.shoes}>
+      </Item>}
+      {componentConfig.shoes && <Item title={locales.components.shoes}>
         <FlexWrapper>
           <Input
             title={locales.components.drawable}
@@ -243,8 +245,8 @@ const Components = ({
             onChange={value => handleComponentTextureChange(6, value)}
           />
         </FlexWrapper>
-      </Item>
-      <Item title={locales.components.decals}>
+      </Item>}
+      {componentConfig.decals && <Item title={locales.components.decals}>
         <FlexWrapper>
           <Input
             title={locales.components.drawable}
@@ -265,7 +267,7 @@ const Components = ({
             onChange={value => handleComponentTextureChange(10, value)}
           />
         </FlexWrapper>
-      </Item>
+      </Item>}
     </Section>
   );
 };

@@ -594,6 +594,7 @@ const Appearance = () => {
                       storedData={storedData.components}
                       handleComponentDrawableChange={handleComponentDrawableChange}
                       handleComponentTextureChange={handleComponentTextureChange}
+                      componentConfig={config.componentConfig}
                     />
                   )}
                   {config.props && (
@@ -603,6 +604,7 @@ const Appearance = () => {
                       storedData={storedData.props}
                       handlePropDrawableChange={handlePropDrawableChange}
                       handlePropTextureChange={handlePropTextureChange}
+                      propConfig={config.propConfig}
                     />
                   )}
                   {isPedFreemodeModel && config.tattoos && (
@@ -627,7 +629,7 @@ const Appearance = () => {
                   handleRotateRight={handleRotateRight}
                   handleSave={handleSaveModal}
                   handleExit={handleExitModal}
-                  disableCancel={config.disableCancel}
+                  enableExit={config.enableExit}
                 />
               </Wrapper>
             </animated.div>
@@ -644,7 +646,7 @@ const Appearance = () => {
                 decline={locales.modal.decline}
                 handleAccept={() => handleSave(true)}
                 handleDecline={() => handleSave(false)}
-                disableCancel={config.disableCancel}
+                enableExit={config.enableExit}
               />
             </animated.div>
           ),
@@ -660,7 +662,7 @@ const Appearance = () => {
                 decline={locales.modal.decline}
                 handleAccept={() => handleExit(true)}
                 handleDecline={() => handleExit(false)}
-                disableCancel={config.disableCancel}
+                enableExit={config.enableExit}
               />
             </animated.div>
           ),

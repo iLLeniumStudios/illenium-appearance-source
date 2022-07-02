@@ -5,7 +5,7 @@ import Item from './components/Item';
 import { FlexWrapper } from './styles';
 import Input from './components/Input';
 
-import { PropSettings, PedProp } from './interfaces';
+import { PropSettings, PedProp, PropConfig } from './interfaces';
 
 interface PropsProps {
   settings: PropSettings[];
@@ -13,13 +13,14 @@ interface PropsProps {
   storedData: PedProp[];
   handlePropDrawableChange: (prop_id: number, drawable: number) => void;
   handlePropTextureChange: (prop_id: number, texture: number) => void;
+  propConfig: PropConfig;
 }
 
 interface DataById<T> {
   [key: number]: T;
 }
 
-const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePropTextureChange }: PropsProps) => {
+const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePropTextureChange, propConfig }: PropsProps) => {
   const { locales } = useNuiState();
 
   const settingsById = settings.reduce((object, { prop_id, drawable, texture, blacklist }) => {
@@ -40,7 +41,7 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
 
   return (
     <Section title={locales.props.title}>
-      <Item title={locales.props.hats}>
+      {propConfig.hats && <Item title={locales.props.hats}>
         <FlexWrapper>
           <Input
             title={locales.props.drawable}
@@ -61,8 +62,8 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
             onChange={value => handlePropTextureChange(0, value)}
           />
         </FlexWrapper>
-      </Item>
-      <Item title={locales.props.glasses}>
+      </Item>}
+      {propConfig.glasses && <Item title={locales.props.glasses}>
         <FlexWrapper>
           <Input
             title={locales.props.drawable}
@@ -83,8 +84,8 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
             onChange={value => handlePropTextureChange(1, value)}
           />
         </FlexWrapper>
-      </Item>
-      <Item title={locales.props.ear}>
+      </Item>}
+      {propConfig.ear && <Item title={locales.props.ear}>
         <FlexWrapper>
           <Input
             title={locales.props.drawable}
@@ -105,8 +106,8 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
             onChange={value => handlePropTextureChange(2, value)}
           />
         </FlexWrapper>
-      </Item>
-      <Item title={locales.props.watches}>
+      </Item>}
+      {propConfig.watches && <Item title={locales.props.watches}>
         <FlexWrapper>
           <Input
             title={locales.props.drawable}
@@ -127,8 +128,8 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
             onChange={value => handlePropTextureChange(6, value)}
           />
         </FlexWrapper>
-      </Item>
-      <Item title={locales.props.bracelets}>
+      </Item>}
+      {propConfig.bracelets && <Item title={locales.props.bracelets}>
         <FlexWrapper>
           <Input
             title={locales.props.drawable}
@@ -149,7 +150,7 @@ const Props = ({ settings, data, storedData, handlePropDrawableChange, handlePro
             onChange={value => handlePropTextureChange(7, value)}
           />
         </FlexWrapper>
-      </Item>
+      </Item>}
     </Section>
   );
 };
