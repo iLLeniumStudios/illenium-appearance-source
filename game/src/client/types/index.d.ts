@@ -315,6 +315,17 @@ interface TattooList {
   [key: string]: Tattoo[];
 }
 
+interface PedConfig {
+  pedConfig: PedConfigItem[];
+}
+
+interface PedConfigItem {
+  peds: string[];
+  jobs: string[];
+  gangs: string[];
+  aces: string[];
+}
+
 interface TattoosSettings {
   items: TattooList;
 }

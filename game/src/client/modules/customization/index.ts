@@ -8,7 +8,7 @@ import {
 } from '../../constants';
 
 import {
-  pedModels,
+  pedConfig,
   getPedAppearance,
   setPlayerAppearance,
   totalTattoos,
@@ -108,6 +108,25 @@ function addToBlacklist(
   if (item.textures === undefined || item.textures.length === 0) {
     blacklistSettings.drawables.push(drawable);
   }
+}
+
+function filterPedModelsForPlayer(pedConfigs: PedConfigItem[]): string[] {
+  let playerPeds: string[] = [];
+  const job = getPlayerJob();
+  const gang = getPlayerGang();
+  const allowedAces = getPlayerAces();
+  for (let i = 0; i < pedConfigs.length; i++) {
+    const config = pedConfigs[i];
+    if (
+      (!config.jobs && !config.gangs && !config.aces) ||
+      (config.jobs && config.jobs.includes(job)) ||
+      (config.gangs && config.gangs.includes(gang)) ||
+      (config.aces && config.aces.some(r => allowedAces.includes(r)))
+    ) {
+      playerPeds.push(...config.peds);
+    }
+  }
+  return playerPeds;
 }
 
 function filterBlacklistSettings(items: BlacklistItem[], drawableId: number): BlacklistSettings {
@@ -284,7 +303,7 @@ export function getAppearanceSettings(): AppearanceSettings {
 
   const ped: PedSettings = {
     model: {
-      items: pedModels,
+      items: filterPedModelsForPlayer(pedConfig.pedConfig),
     },
   };
 

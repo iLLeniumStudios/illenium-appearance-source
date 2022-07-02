@@ -47,7 +47,7 @@ export const totalTattoos: TattooList = JSON.parse(
   LoadResourceFile(GetCurrentResourceName(), 'tattoos.json'),
 );
 
-export const pedModels: string[] = JSON.parse(
+export const pedConfig: PedConfig = JSON.parse(
   LoadResourceFile(GetCurrentResourceName(), 'peds.json'),
 );
 
@@ -66,11 +66,23 @@ export const locales = JSON.parse(
   ),
 );
 
-const pedModelsByHash = pedModels.reduce((object, model) => {
-  return { ...object, [GetHashKey(model)]: model };
-}, {});
+let hashesComputed = false;
+
+const pedModelsByHash = {};
+
+function computePedModelsByHash() {
+  for (let i = 0; i < pedConfig.pedConfig.length; i++) {
+    for (let ped in pedConfig.pedConfig[i].peds) {
+      pedModelsByHash[GetHashKey(ped)] = ped;
+    }
+  }
+}
 
 function getPedModel(ped: number): string {
+  if (!hashesComputed) {
+    computePedModelsByHash();
+    hashesComputed = true;
+  }
   return pedModelsByHash[GetEntityModel(ped)];
 }
 

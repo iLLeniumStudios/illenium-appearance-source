@@ -67,11 +67,11 @@ export function registerNuiCallbacks(): void {
   on(
     '__cfx_nui:appearance_get_settings_and_data',
     async (_: any, cb: (arg: any) => void): Promise<void> => {
+      emitNet('fivem-appearance:server:GetPlayerAces');
+      await Delay(250);
       const config = getConfig();
       const appearanceData = getAppearance();
       const appearanceSettings = getAppearanceSettings();
-      emitNet('fivem-appearance:server:GetPlayerAces');
-      await Delay(250);
       cb({ config, appearanceData, appearanceSettings });
     },
   );

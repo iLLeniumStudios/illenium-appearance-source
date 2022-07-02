@@ -506,16 +506,19 @@ const Appearance = () => {
     });
   }, []);
 
+  const fetchData = useCallback(async () => {
+    const result = await Nui.post('appearance_get_settings_and_data');
+    setConfig(result.config);
+    setAppearanceSettings(result.appearanceSettings);
+    setStoredData(result.appearanceData);
+    setData(result.appearanceData); 
+  }, []);
+
   useEffect(() => {
     if (display.appearance) {
-      Nui.post('appearance_get_settings_and_data').then(result => {
-        setConfig(result.config);
-        setAppearanceSettings(result.appearanceSettings);
-        setStoredData(result.appearanceData);
-        setData(result.appearanceData);
-      });
+      fetchData().catch(console.error);
     }
-  }, [display.appearance]);
+  }, [display.appearance, fetchData]);
 
   if (!display.appearance || !config || !appearanceSettings || !data || !storedData || !locales) {
     return null;
