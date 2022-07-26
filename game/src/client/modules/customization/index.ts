@@ -472,7 +472,7 @@ export function setCamera(key: string): void {
       0.0,
       0.0,
       0.0,
-      50.0,
+      49.0,
       false,
       0,
     );
@@ -506,7 +506,7 @@ export function setCamera(key: string): void {
       0.0,
       0.0,
       0.0,
-      50.0,
+      49.0,
       false,
       0,
     );
@@ -554,7 +554,7 @@ export async function rotateCamera(direction: 'left' | 'right'): Promise<void> {
     0.0,
     0.0,
     0.0,
-    50.0,
+    49.0,
     false,
     0,
   );

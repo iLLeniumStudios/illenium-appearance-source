@@ -3,6 +3,7 @@
     "es6": true,
     "node": true
   },
+  "strict": true,
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint",
