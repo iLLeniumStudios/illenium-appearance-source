@@ -580,6 +580,7 @@ export const SETTINGS_INITIAL_STATE: AppearanceSettings = {
       min: 0,
       max: 255,
     },
+    blacklist: { drawables: [], textures: [] }
   },
   eyeColor: {
     min: 0,

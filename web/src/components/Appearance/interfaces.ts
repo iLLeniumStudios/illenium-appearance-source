@@ -205,6 +205,7 @@ export interface HairSettings {
     min: number;
     max: number;
   };
+  blacklist: BlacklistSettings;
 }
 
 export interface EyeColorSettings {

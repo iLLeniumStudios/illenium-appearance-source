@@ -78,6 +78,7 @@ const HeadOverlays = ({
           title={locales.headOverlays.hair.style}
           min={settings.hair.style.min}
           max={settings.hair.style.max}
+          blacklisted={settings.hair.blacklist.drawables}
           defaultValue={data.hair.style}
           clientValue={storedData.hair.style}
           onChange={value => handleHairChange('style', value)}
@@ -86,6 +87,7 @@ const HeadOverlays = ({
           title={locales.headOverlays.hair.texture}
           min={settings.hair.texture.min}
           max={settings.hair.texture.max}
+          blacklisted={settings.hair.blacklist.textures}
           defaultValue={data.hair.texture}
           clientValue={storedData.hair.texture}
           onChange={value => handleHairChange('texture', value)}
