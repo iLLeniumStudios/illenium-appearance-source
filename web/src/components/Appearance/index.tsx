@@ -646,7 +646,6 @@ const Appearance = () => {
                 decline={locales.modal.decline}
                 handleAccept={() => handleSave(true)}
                 handleDecline={() => handleSave(false)}
-                enableExit={config.enableExit}
               />
             </animated.div>
           ),
@@ -662,7 +661,6 @@ const Appearance = () => {
                 decline={locales.modal.decline}
                 handleAccept={() => handleExit(true)}
                 handleDecline={() => handleExit(false)}
-                enableExit={config.enableExit}
               />
             </animated.div>
           ),

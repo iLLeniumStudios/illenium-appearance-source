@@ -7,10 +7,9 @@ interface ModalProps {
   decline: string;
   handleAccept: () => Promise<void> | void;
   handleDecline: () => Promise<void> | void;
-  enableExit: boolean;
 }
 
-const Modal = ({ title, description, accept, decline, handleAccept, handleDecline, enableExit }: ModalProps) => {
+const Modal = ({ title, description, accept, decline, handleAccept, handleDecline }: ModalProps) => {
   return (
     <Wrapper>
       <p>{title}</p>
@@ -19,10 +18,9 @@ const Modal = ({ title, description, accept, decline, handleAccept, handleDeclin
         <button type="button" onClick={handleAccept}>
           {accept}
         </button>
-        {enableExit && 
         <button type="button" onClick={handleDecline}>
           {decline}
-        </button>}
+        </button>
       </Buttons>
     </Wrapper>
   );
