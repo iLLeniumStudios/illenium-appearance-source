@@ -14,6 +14,7 @@ interface ComponentsProps {
   handleComponentDrawableChange: (component_id: number, drawable: number) => void;
   handleComponentTextureChange: (component_id: number, texture: number) => void;
   componentConfig: ComponentConfig;
+  hasTracker: boolean;
 }
 
 interface DataById<T> {
@@ -27,6 +28,7 @@ const Components = ({
   handleComponentDrawableChange,
   handleComponentTextureChange,
   componentConfig,
+  hasTracker
 }: ComponentsProps) => {
   const { locales } = useNuiState();
 
@@ -70,7 +72,7 @@ const Components = ({
           />
         </FlexWrapper>
       </Item>}
-      {componentConfig.scarfAndChains && <Item title={locales.components.scarfAndChains}>
+      {componentConfig.scarfAndChains && !hasTracker && <Item title={locales.components.scarfAndChains}>
         <FlexWrapper>
           <Input
             title={locales.components.drawable}

@@ -606,6 +606,7 @@ const Appearance = () => {
                       handleComponentDrawableChange={handleComponentDrawableChange}
                       handleComponentTextureChange={handleComponentTextureChange}
                       componentConfig={config.componentConfig}
+                      hasTracker={config.hasTracker}
                     />
                   )}
                   {config.props && (

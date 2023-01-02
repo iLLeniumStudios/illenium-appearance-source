@@ -236,6 +236,7 @@ export interface CustomizationConfig {
   propConfig: PropConfig;
   tattoos: boolean;
   enableExit: boolean;
+  hasTracker: boolean;
 }
 
 export interface ComponentConfig {
