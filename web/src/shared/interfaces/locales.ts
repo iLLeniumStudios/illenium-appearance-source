@@ -122,6 +122,7 @@ export default interface Locales {
     bodyArmor: string;
     decals: string;
     jackets: string;
+    head: string;
   };
   props: {
     title: string;

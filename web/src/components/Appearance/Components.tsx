@@ -15,6 +15,7 @@ interface ComponentsProps {
   handleComponentTextureChange: (component_id: number, texture: number) => void;
   componentConfig: ComponentConfig;
   hasTracker: boolean;
+  isPedFreemodeModel: boolean | undefined;
 }
 
 interface DataById<T> {
@@ -28,7 +29,8 @@ const Components = ({
   handleComponentDrawableChange,
   handleComponentTextureChange,
   componentConfig,
-  hasTracker
+  hasTracker,
+  isPedFreemodeModel
 }: ComponentsProps) => {
   const { locales } = useNuiState();
 
@@ -50,6 +52,28 @@ const Components = ({
 
   return (
     <Section title={locales.components.title}>
+      {!isPedFreemodeModel && <Item title={locales.components.head}>
+        <FlexWrapper>
+          <Input
+            title={locales.components.drawable}
+            min={settingsById[0].drawable.min}
+            max={settingsById[0].drawable.max}
+            blacklisted={settingsById[0].blacklist.drawables}
+            defaultValue={componentsById[0].drawable}
+            clientValue={storedComponentsById[0].drawable}
+            onChange={value => handleComponentDrawableChange(0, value)}
+          />
+          <Input
+            title={locales.components.texture}
+            min={settingsById[0].texture.min}
+            max={settingsById[0].texture.max}
+            blacklisted={settingsById[0].blacklist.textures}
+            defaultValue={componentsById[0].texture}
+            clientValue={storedComponentsById[0].texture}
+            onChange={value => handleComponentTextureChange(0, value)}
+          />
+        </FlexWrapper>
+      </Item>}
       {componentConfig.masks && <Item title={locales.components.mask}>
         <FlexWrapper>
           <Input

@@ -607,6 +607,7 @@ const Appearance = () => {
                       handleComponentTextureChange={handleComponentTextureChange}
                       componentConfig={config.componentConfig}
                       hasTracker={config.hasTracker}
+                      isPedFreemodeModel={isPedFreemodeModel}
                     />
                   )}
                   {config.props && (
