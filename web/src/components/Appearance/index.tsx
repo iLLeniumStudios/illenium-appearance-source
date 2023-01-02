@@ -516,9 +516,20 @@ const Appearance = () => {
 
   useEffect(() => {
     if (display.appearance) {
-      fetchData().catch(console.error);
+      (async () => {
+        const {
+          config: _config,
+          appearanceSettings: settings,
+          appearanceData,
+        } = await Nui.post('appearance_get_settings_and_data');
+        setConfig(_config);
+        setAppearanceSettings(settings);
+        setStoredData(appearanceData);
+        setData(appearanceData);
+      })();
+      //fetchData().catch(console.error);
     }
-  }, [display.appearance, fetchData]);
+  }, [display.appearance]);
 
   if (!display.appearance || !config || !appearanceSettings || !data || !storedData || !locales) {
     return null;
