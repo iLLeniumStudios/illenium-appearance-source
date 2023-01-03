@@ -16,7 +16,6 @@ import {
   CameraState,
   ClothesState,
   Tattoo,
-  TattooList,
   TattoosSettings,
 } from './interfaces';
 
@@ -442,11 +441,13 @@ const Appearance = () => {
     async (tattoo: Tattoo) => {
       if (!data) return;
       const { tattoos } = data;
-      const updatedTattoos = { ...tattoos };
+      const updatedTattoos = JSON.parse(JSON.stringify({ ...tattoos}));
       if (!updatedTattoos[tattoo.zone]) updatedTattoos[tattoo.zone] = [];
       updatedTattoos[tattoo.zone].push(tattoo);
-      await Nui.post('appearance_apply_tattoo', updatedTattoos);
-      setData({ ...data, tattoos: updatedTattoos });
+      const applied = await Nui.post('appearance_apply_tattoo', {tattoo, updatedTattoos});
+      if(applied) {
+        setData({ ...data, tattoos: updatedTattoos });
+      }
     },
     [data, setData],
   );
