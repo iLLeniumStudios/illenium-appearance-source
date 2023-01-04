@@ -11,8 +11,8 @@ interface TattoosProps {
   settings: TattoosSettings;
   data: TattooList;
   storedData: TattooList;
-  handleApplyTattoo: (value: Tattoo) => void;
-  handlePreviewTattoo: (value: Tattoo) => void;
+  handleApplyTattoo: (value: Tattoo, opacity: number) => void;
+  handlePreviewTattoo: (value: Tattoo, opacity: number) => void;
   handleDeleteTattoo: (value: Tattoo) => void;
   handleClearTattoos: () => void;
 }

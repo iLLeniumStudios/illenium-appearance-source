@@ -438,8 +438,9 @@ const Appearance = () => {
   };
 
   const handleApplyTattoo = useCallback(
-    async (tattoo: Tattoo) => {
+    async (tattoo: Tattoo, opacity: number) => {
       if (!data) return;
+      tattoo.opacity = opacity;
       const { tattoos } = data;
       const updatedTattoos = JSON.parse(JSON.stringify({ ...tattoos}));
       if (!updatedTattoos[tattoo.zone]) updatedTattoos[tattoo.zone] = [];
@@ -453,8 +454,9 @@ const Appearance = () => {
   );
 
   const handlePreviewTattoo = useCallback(
-    (tattoo: Tattoo) => {
+    (tattoo: Tattoo, opacity: number) => {
       if (!data) return;
+      tattoo.opacity = opacity;
       const { tattoos } = data;
       Nui.post('appearance_preview_tattoo', { data: tattoos, tattoo });
     },

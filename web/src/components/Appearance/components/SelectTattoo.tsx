@@ -1,4 +1,4 @@
-import { useCallback, useContext, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 import Select from 'react-select';
 import { useNuiState } from '../../../hooks/nuiState';
@@ -10,8 +10,8 @@ import { TattoosSettings } from '../interfaces';
 interface SelectTattooProps {
   items: Tattoo[];
   tattoosApplied: Tattoo[] | null;
-  handleApplyTattoo: (value: Tattoo) => void;
-  handlePreviewTattoo: (value: Tattoo) => void;
+  handleApplyTattoo: (value: Tattoo, opacity: number) => void;
+  handlePreviewTattoo: (value: Tattoo, opacity: number) => void;
   handleDeleteTattoo: (value: Tattoo) => void;
   settings: TattoosSettings;
 }
@@ -121,18 +121,34 @@ const SelectTattoo = ({
   const { label } = currentTattoo;
   const { locales } = useNuiState();
 
+  const clientOpacity = useCallback(() => {
+    if (!tattoosApplied) return defaultOpacity;
+    const { name } = currentTattoo;
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < tattoosApplied.length; i++) {
+      const { name: nameApplied } = tattoosApplied[i];
+      if (nameApplied === name) { 
+        return tattoosApplied[i].opacity ?? defaultOpacity;
+      }
+    }
+
+    return defaultOpacity;
+  }, [currentTattoo, tattoosApplied])();
+
+  useEffect(() => {
+    setOpacity(clientOpacity);
+  }, [clientOpacity]);
+
   const handleChange = (event: any, { action }: any): void => {
     if (action === 'select-option') {
-      handlePreviewTattoo(event.value);
+      handlePreviewTattoo(event.value, opacity);
       setCurrentTattoo(event.value);
-      setOpacity(event.value.opacity ?? defaultOpacity);
     }
   };
 
-  const handleChangeOpacity = useCallback((value : number) => {
-    currentTattoo.opacity = value;
+  const handleChangeOpacity = useCallback((value : number) => {    
     setOpacity(value);
-    handlePreviewTattoo(currentTattoo);
+    handlePreviewTattoo(currentTattoo, value);
   }, [currentTattoo]);
 
   const onMenuOpen = () => {
@@ -154,18 +170,6 @@ const SelectTattoo = ({
     }
 
     return false;
-  }, [tattoosApplied, currentTattoo])();
-
-  const clientTattooOpacity = useCallback(() => {
-    if (!tattoosApplied) return defaultOpacity;
-    const { name } = currentTattoo;
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < tattoosApplied.length; i++) {
-      const { name: nameApplied } = tattoosApplied[i];
-      if (nameApplied === name) return tattoosApplied[i].opacity;
-    }
-
-    return defaultOpacity;
   }, [tattoosApplied, currentTattoo])();
 
   if (!locales) {
@@ -197,13 +201,13 @@ const SelectTattoo = ({
               max={settings.opacity.max}
               factor={settings.opacity.factor}
               defaultValue={opacity}
-              clientValue={clientTattooOpacity}
+              clientValue={clientOpacity}
               onChange={value => handleChangeOpacity(value)} />
       <section>
         {isTattooApplied ? (
           <Button onClick={() => handleDeleteTattoo(currentTattoo)}>{locales.tattoos.delete}</Button>
         ) : (
-          <Button onClick={() => handleApplyTattoo(currentTattoo)}>{locales.tattoos.apply}</Button>
+          <Button onClick={() => handleApplyTattoo(currentTattoo, opacity)}>{locales.tattoos.apply}</Button>
         )}
       </section>
     </Container>
