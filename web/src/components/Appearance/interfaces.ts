@@ -284,6 +284,7 @@ export interface Tattoo {
   hashFemale: string;
   zone: string;
   collection: string;
+  opacity: number;
 }
 
 export interface TattooList {
@@ -292,4 +293,9 @@ export interface TattooList {
 
 export interface TattoosSettings {
   items: TattooList;
+  opacity: {
+    min: number;
+    max: number;
+    factor: number;
+  };
 }

@@ -10,13 +10,14 @@ import Button from './components/Button';
 interface TattoosProps {
   settings: TattoosSettings;
   data: TattooList;
+  storedData: TattooList;
   handleApplyTattoo: (value: Tattoo) => void;
   handlePreviewTattoo: (value: Tattoo) => void;
   handleDeleteTattoo: (value: Tattoo) => void;
   handleClearTattoos: () => void;
 }
 
-const Tattoos = ({ settings, data, handleApplyTattoo, handlePreviewTattoo, handleDeleteTattoo, handleClearTattoos }: TattoosProps) => {
+const Tattoos = ({ settings, data, storedData, handleApplyTattoo, handlePreviewTattoo, handleDeleteTattoo, handleClearTattoos }: TattoosProps) => {
   const { locales } = useNuiState();
 
   const { items } = settings;
@@ -39,6 +40,7 @@ const Tattoos = ({ settings, data, handleApplyTattoo, handlePreviewTattoo, handl
               handleDeleteTattoo={handleDeleteTattoo}
               items={items[key]}
               tattoosApplied={data[key] ?? null}
+              settings={settings}
             />
           </FlexWrapper>
         </Item>

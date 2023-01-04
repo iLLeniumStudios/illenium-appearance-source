@@ -625,6 +625,7 @@ const Appearance = () => {
                     <Tattoos
                       settings={filterTattoos(appearanceSettings.tattoos)}
                       data={data.tattoos}
+                      storedData={storedData.tattoos}
                       handleApplyTattoo={handleApplyTattoo}
                       handlePreviewTattoo={handlePreviewTattoo}
                       handleDeleteTattoo={handleDeleteTattoo}

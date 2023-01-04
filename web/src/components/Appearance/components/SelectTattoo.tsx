@@ -4,6 +4,8 @@ import Select from 'react-select';
 import { useNuiState } from '../../../hooks/nuiState';
 import Button from './Button';
 import { Tattoo } from '../interfaces';
+import RangeInput from './RangeInput';
+import { TattoosSettings } from '../interfaces';
 
 interface SelectTattooProps {
   items: Tattoo[];
@@ -11,6 +13,7 @@ interface SelectTattooProps {
   handleApplyTattoo: (value: Tattoo) => void;
   handlePreviewTattoo: (value: Tattoo) => void;
   handleDeleteTattoo: (value: Tattoo) => void;
+  settings: TattoosSettings;
 }
 
 const Container = styled.div`
@@ -109,9 +112,12 @@ const SelectTattoo = ({
   handleApplyTattoo,
   handlePreviewTattoo,
   handleDeleteTattoo,
+  settings
 }: SelectTattooProps) => {
+  const defaultOpacity = 0.1;
   const selectRef = useRef<any>(null);
   const [currentTattoo, setCurrentTattoo] = useState<Tattoo>(items[0]);
+  const [opacity, setOpacity] = useState<number>(defaultOpacity);
   const { label } = currentTattoo;
   const { locales } = useNuiState();
 
@@ -119,8 +125,15 @@ const SelectTattoo = ({
     if (action === 'select-option') {
       handlePreviewTattoo(event.value);
       setCurrentTattoo(event.value);
+      setOpacity(event.value.opacity ?? defaultOpacity);
     }
   };
+
+  const handleChangeOpacity = useCallback((value : number) => {
+    currentTattoo.opacity = value;
+    setOpacity(value);
+    handlePreviewTattoo(currentTattoo);
+  }, [currentTattoo]);
 
   const onMenuOpen = () => {
     setTimeout(() => {
@@ -141,6 +154,18 @@ const SelectTattoo = ({
     }
 
     return false;
+  }, [tattoosApplied, currentTattoo])();
+
+  const clientTattooOpacity = useCallback(() => {
+    if (!tattoosApplied) return defaultOpacity;
+    const { name } = currentTattoo;
+    // eslint-disable-next-line no-plusplus
+    for (let i = 0; i < tattoosApplied.length; i++) {
+      const { name: nameApplied } = tattoosApplied[i];
+      if (nameApplied === name) return tattoosApplied[i].opacity;
+    }
+
+    return defaultOpacity;
   }, [tattoosApplied, currentTattoo])();
 
   if (!locales) {
@@ -166,6 +191,14 @@ const SelectTattoo = ({
         menuPortalTarget={document.body}
         menuShouldScrollIntoView={true}
       />
+      <RangeInput
+              title={locales.tattoos.opacity}
+              min={settings.opacity.min}
+              max={settings.opacity.max}
+              factor={settings.opacity.factor}
+              defaultValue={opacity}
+              clientValue={clientTattooOpacity}
+              onChange={value => handleChangeOpacity(value)} />
       <section>
         {isTattooApplied ? (
           <Button onClick={() => handleDeleteTattoo(currentTattoo)}>{locales.tattoos.delete}</Button>

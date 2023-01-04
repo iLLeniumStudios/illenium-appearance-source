@@ -79,7 +79,6 @@ const RangeInput: React.FC<RangeInputProps> = ({
   const handleChange = useCallback(
     (e: { target: { value: string } }) => {
       const parsedValue = parseFloat(e.target.value);
-
       onChange(parsedValue);
     },
     [onChange],

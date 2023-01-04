@@ -131,6 +131,11 @@ export const SETTINGS_INITIAL_STATE: AppearanceSettings = {
   },
   tattoos: {
     items: {},
+    opacity: {
+      min: 0,
+      max: 1,
+      factor: 0.1,
+    },
   },
   components: [
     {
