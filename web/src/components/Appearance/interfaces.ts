@@ -237,6 +237,7 @@ export interface CustomizationConfig {
   tattoos: boolean;
   enableExit: boolean;
   hasTracker: boolean;
+  automaticFade: boolean;
 }
 
 export interface ComponentConfig {

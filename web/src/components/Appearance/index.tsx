@@ -597,6 +597,7 @@ const Appearance = () => {
                           handleHeadOverlayChange={handleHeadOverlayChange}
                           handleEyeColorChange={handleEyeColorChange}
                           handleChangeFade={handleChangeFade}
+                          automaticFade={config.automaticFade}
                         />
                       )}
                     </>
