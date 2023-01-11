@@ -41,8 +41,7 @@ import { Wrapper, Container } from './styles';
 import { ThemeContext } from 'styled-components';
 
 if (!import.meta.env.PROD) {
-  mock('appearance_get_settings_and_data', () => ({
-    appearanceData: { ...APPEARANCE_INITIAL_STATE, model: 'mp_f_freemode_01' },
+  mock('appearance_get_settings', () => ({
     appearanceSettings: {
       ...SETTINGS_INITIAL_STATE,
       eyeColor: { min: 0, max: 24 },
@@ -58,6 +57,10 @@ if (!import.meta.env.PROD) {
         },
       },
     },
+  }));
+
+  mock('appearance_get_data', () => ({
+    appearanceData: { ...APPEARANCE_INITIAL_STATE, model: 'mp_f_freemode_01' },
   }));
 
   mock('appearance_change_model', () => SETTINGS_INITIAL_STATE);
@@ -495,42 +498,45 @@ const Appearance = () => {
   useEffect(() => {
     Nui.post('appearance_get_locales').then(result => setLocales(result));
 
-    Nui.onEvent('appearance_display', () => {
-      setDisplay({ appearance: true });
+    Nui.onEvent('appearance_display', (data : any) => {
+      setDisplay({ appearance: true, asynchronous: data.asynchronous });
     });
 
     Nui.onEvent('appearance_hide', () => {
-      setDisplay({ appearance: false });
+      setDisplay({ appearance: false, asynchronous: false });
       setData(APPEARANCE_INITIAL_STATE);
       setStoredData(APPEARANCE_INITIAL_STATE);
-      setAppearanceSettings(SETTINGS_INITIAL_STATE);
+      //setAppearanceSettings(SETTINGS_INITIAL_STATE);
       setCamera(CAMERA_INITIAL_STATE);
       setRotate(ROTATE_INITIAL_STATE);
     });
   }, []);
 
   const fetchData = useCallback(async () => {
-    const result = await Nui.post('appearance_get_settings_and_data');
+    const result = await Nui.post('appearance_get_data');
     setConfig(result.config);
-    setAppearanceSettings(result.appearanceSettings);
     setStoredData(result.appearanceData);
     setData(result.appearanceData); 
   }, []);
 
+  const fetchSettings = useCallback(async () => {
+    if(appearanceSettings === undefined || appearanceSettings === SETTINGS_INITIAL_STATE) {
+      const result = await Nui.post('appearance_get_settings');
+      setAppearanceSettings(result.appearanceSettings);
+    }
+  }, []);
+
   useEffect(() => {
     if (display.appearance) {
-      (async () => {
-        const {
-          config: _config,
-          appearanceSettings: settings,
-          appearanceData,
-        } = await Nui.post('appearance_get_settings_and_data');
-        setConfig(_config);
-        setAppearanceSettings(settings);
-        setStoredData(appearanceData);
-        setData(appearanceData);
-      })();
-      //fetchData().catch(console.error);
+      if(display.asynchronous) {
+        (async () => {
+          await fetchSettings();
+          await fetchData();
+        })();
+      } else {
+        fetchSettings().catch(console.error);
+        fetchData().catch(console.error);
+      }
     }
   }, [display.appearance]);
 

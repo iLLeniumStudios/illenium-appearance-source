@@ -3,6 +3,7 @@ import Locales from '../shared/interfaces/locales';
 
 interface Display {
   appearance: boolean;
+  asynchronous: boolean;
 }
 
 interface NuiState {
@@ -20,6 +21,7 @@ interface NuiContextData {
 const INITIAL_STATE: NuiState = {
   display: {
     appearance: false,
+    asynchronous: false,
   },
 };
 
