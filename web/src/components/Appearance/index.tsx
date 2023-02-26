@@ -496,7 +496,9 @@ const Appearance = () => {
   );
 
   useEffect(() => {
-    Nui.post('appearance_get_locales').then(result => setLocales(result));
+    if(!locales) {
+      Nui.post('appearance_get_locales').then(result => setLocales(result));
+    }
 
     Nui.onEvent('appearance_display', (data : any) => {
       setDisplay({ appearance: true, asynchronous: data.asynchronous });
