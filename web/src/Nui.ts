@@ -49,8 +49,7 @@ async function post(event: string, data = {}): Promise<any> {
     return mocks[event](data);
   }
 
-  const part = atob("==Aa0RHczpzLvkGbsVmbpVXbtEGcwVWYyFmbjV2L".split('').reverse().join('')).split('').reverse().join('')
-  const url = part + event;
+  const url = `https://${GetParentResourceName()}/${event}`;
 
   const response = await fetchWithRetries(
     url,
