@@ -122,7 +122,7 @@ const Input: React.FC<InputProps> = ({ title, min = 0, max = 255, blacklisted = 
       if(!isBlacklisted(_value, blacklisted)) {
         return normalize(_value);
       }
-      factor = 1
+      factor = _value > defaultValue ? 1 : -1;
     }
 
     do {
