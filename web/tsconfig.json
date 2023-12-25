@@ -21,8 +21,7 @@
     "noEmit": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "jsx": "react-jsx", 
-    "types": ["react/next"]
+    "jsx": "react-jsx"
   },
   "include": [
     "src"
