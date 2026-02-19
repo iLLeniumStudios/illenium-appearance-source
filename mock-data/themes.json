@@ -1,0 +1,33 @@
+{
+  "currentTheme": "FOXXX",
+  "themes": [
+    {
+        "id": "FOXXX",
+        "borderRadius": "6vh",
+        "fontColor": "200, 200, 200",
+        "fontColorHover": "200, 200, 200",
+        "fontColorSelected": "31, 77, 46",
+        "fontFamily": "Inter",
+        "primaryBackground": "136, 0, 255",
+        "primaryBackgroundSelected": "255, 255, 255",
+        "secondaryBackground": "136, 0, 255",
+        "scaleOnHover": true,
+        "sectionFontWeight": "bold",
+        "smoothBackgroundTransition": true
+    },
+    {
+        "id": "juliroo",
+        "borderRadius": ".2vw",
+        "fontColor": "0, 0, 0",
+        "fontColorHover": "0, 0, 0",
+        "fontColorSelected": "0, 0, 0",
+        "fontFamily": "Inter",
+        "primaryBackground": "250, 250, 250",
+        "primaryBackgroundSelected": "250, 250, 250",
+        "secondaryBackground": "250, 250, 250",
+        "scaleOnHover": false,
+        "sectionFontWeight": "normal",
+        "smoothBackgroundTransition": false
+    }
+  ]
+}

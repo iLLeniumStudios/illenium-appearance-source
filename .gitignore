@@ -1,10 +1,31 @@
-release/
-node_modules/
-yarn.lock
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-game/node_modules/
-game/dist/
-game/yarn.lock
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
 
+<<<<<<< Updated upstream
 web/node_modules/
 web/yarn.lock
+=======
+#eslint
+.eslintcache
+
+# testing
+/coverage
+
+# production
+/dist
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+>>>>>>> Stashed changes
